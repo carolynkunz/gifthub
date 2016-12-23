@@ -30,6 +30,26 @@ const styles = StyleSheet.create({
     height: 350,
   },
 
+  loginContainer: {
+    flex: 3,
+    padding: 30,
+    marginTop: 65,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    backgroundColor: '#3066BE'
+  },
+
+  loginTextInput: {
+    height: 50,
+    paddingTop: 4,
+    marginRight: 5,
+    fontSize: 23,
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 8,
+    color: '#F1E4E8'
+  },
+
   mainContainer: {
     flex: 1,
     padding: 30,

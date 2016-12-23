@@ -1,4 +1,19 @@
 const api = {
+  userSignin() {
+    let headers = new Headers();
+    let myInit =
+      { method: 'POST',
+        headers: headers
+      };
+
+    const user = {username: this.props.username, password: this.props.password}
+
+    headers.append("Accept", "application/json");
+
+    fetch('http://localhost:8000/api/token', myInit)
+      .then((res) => res.json())
+      return res;
+  },
 
   getUsers() {
     let headers = new Headers();
@@ -8,8 +23,10 @@ const api = {
       };
 
     headers.append("Accept", "application/json");
+
     fetch('http://localhost:8000/api/users', myInit)
       .then((res) => res.json())
+      return res;
   },
 
   getUsersByUsername(username) {
@@ -24,7 +41,9 @@ const api = {
     headers.append("Accept", "application/json");
 
     fetch(`http://localhost:8000/api/users/${username}`, myInit)
-    .then((res) => res.json())
+      .then((res) => res.json())
+
+      return res;
   },
 
   getRecipients() {
@@ -37,22 +56,10 @@ const api = {
     headers.append("Accept", "application/json");
     fetch('http://localhost:8000/recipients', myInit)
       .then((res) => res.json())
+
+      return res;
   },
 
-  // getRecipientsByFirstname(first_name) {
-  //
-  //   let headers = new Headers();
-  //   let myInit =
-  //     { method: 'GET',
-  //       headers: headers
-  //     };
-  //
-  //   headers.append("Accept", "application/json");
-  //
-  //   fetch(`http://localhost:8000/recipients/${first_name}`, myInit)
-  //     .then((res) => res.json())
-  //     .then((data) => console.log(data));
-  // }
 
   getRecipientsByFirstname(first_name) {
 
@@ -69,9 +76,8 @@ const api = {
       fetch(url, myInit)
         .then((res) => res.json());
 
-    return res;
+        return res;
   }
-
 };
 
 module.exports = api;
