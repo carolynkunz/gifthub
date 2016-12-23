@@ -1,4 +1,4 @@
-import { Image, TouchableHighlight, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Image, InteractionManager, TouchableHighlight, StyleSheet, Text, TextInput, View } from 'react-native';
 import React, { Component } from 'react';
 import api from '../utils/api';
 import Recipient from './Recipient';
@@ -9,43 +9,72 @@ import styles from '../styles/appStyle';
 
 
 export default class Dashboard extends Component {
-  makeBackground(btn) {
-    const obj = {
-      flexDirection: 'row',
-      alignSelf: 'stretch',
-      justifyContent: 'center',
-      flex: 1
+  constructor(props) {
+    super(props);
+    this.state = {
+      recipientFirstName: '',
+      isLoading: false,
+      error: false
     }
-
-    if(btn === 0){
-      obj.backgroundColor = "#CAE5FF"
-    } else if (btn === 1) {
-      obj.backgroundColor = "#6D9DC5"
-    } else {
-      obj.backgroundColor = "#8EA4D2"
-    }
-
-    return obj;
   }
 
-  goToRecipient() {
-    this.props.navigator.push({
-      component: Recipient,
-      title: 'Recipient Profile',
-      passProps: {userInfo: this.props.userInfo}
-    })
+  handleChange(event) {
+    this.setState({
+      recipientFirstName: event.nativeEvent.text
+    });
   }
 
+  handleSubmit() {
+    InteractionManager.runAfterInteractions(() => {
+      this.setState({
+        isLoading: true
+      })
+    });
+
+    api.getRecipientsByFirstname(this.state.recipientFirstName)
+      .then((res) => {
+        if(res === 'Not Found') {
+          this.setState({
+            error: 'Recipient not found',
+            isLoading: false
+          })
+        } else {
+          this.props.navigator.push({
+            title: res.first_name || "Recipient Profile",
+            component: Recipient,
+            passProps: {userInfo: res}
+          });
+          InteractionManager.runAfterInteractions(() => {
+            this.setState({
+              isLoading: false,
+              error: false,
+              recipientFirstName: ''
+            })
+          })
+        }
+    });
+
+  }
 
   render() {
     return (
       <View style={styles.container}>
+        <Text style={styles.title}>Find Recipient</Text>
+        <TextInput
+          style={styles.searchInput}
+          value={this.state.recipientFirstName}
+          onChange={this.handleChange.bind(this)}
+        />
         <TouchableHighlight
-          style={this.makeBackground(0)}
-          onPress={this.goToRecipient.bind(this)}
-          underlayColor="#F1E4E8">
-          <Text style={styles.buttonText}> View Recipient </Text>
+          style={styles.button}
+          onPress={this.handleSubmit.bind(this)}
+          underlayColor="white"
+          >
+          <Text style={styles.buttonText}> SUBMIT </Text>
         </TouchableHighlight>
+        <ActivityIndicator
+          animating={this.state.isLoading}
+          size='large'></ActivityIndicator>
       </View>
     )
   }

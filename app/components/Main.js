@@ -2,85 +2,56 @@ import React, { Component } from 'react';
 import { ActivityIndicator, InteractionManager, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
 import styles from '../styles/appStyle';
 import api from '../utils/api';
-import Dashboard from './Dashboard';
+import Login from './Login';
+import Signup from './Signup';
+
 
 
 export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      first_name: '',
+      username: '',
+      password: '',
       isLoading: false,
       error: false
     }
   }
 
-  handleChange(event) {
-    this.setState({
-      first_name: event.nativeEvent.text
+  goToLogin() {
+    this.props.navigator.push({
+      component: Login,
+      title: 'Login',
+      passProps: {username: this.state.username, password: this.state.password}
     });
   }
 
-  handleSubmit() {
-    InteractionManager.runAfterInteractions(() => {
-      this.setState({
-        isLoading: true
-      })
-    });
-
-  api.getUsers();
-
-  api.getRecipients();
-
-  // api.getUsersByUsername(this.state.username);
-
-  api.getRecipientsByFirstname(this.state.first_name)
-    .then((res) => {
-      if(res === 'Not Found') {
-        this.setState({
-          error: 'Recipient not found',
-          isLoading: false
-        })
-      } else {
-        this.props.navigator.push({
-          // title: res.first_name || "Select an Option",
-          component: Dashboard,
-          passProps: {userInfo: res}
-        });
-        InteractionManager.runAfterInteractions(() => {
-          this.setState({
-            isLoading: false,
-            error: false,
-            first_name: ''
-          })
-        })
-      }
-  });
-
-}
+  goToSignup() {
+    this.props.navigator.push({
+      component: Signup,
+      title: 'Sign Up'
+    })
+  }
 
   render() {
     return (
       <View style={styles.mainContainer}>
-        <Text style={styles.title}>Find Recipient</Text>
-        <TextInput
-          style={styles.searchInput}
-          value={this.state.first_name}
-          onChange={this.handleChange.bind(this)}
-        />
+        <Text style={styles.title}>GiftHub</Text>
         <TouchableHighlight
           style={styles.button}
-          onPress={this.handleSubmit.bind(this)}
+          onPress={this.goToLogin.bind(this)}
           underlayColor="white"
           >
-          <Text style={styles.buttonText}> SUBMIT </Text>
+          <Text style={styles.buttonText}> LOGIN </Text>
         </TouchableHighlight>
-        {/* <ActivityIndicator
-          animating={this.state.isLoading}
-          size='large'></ActivityIndicator> */}
+        <TouchableHighlight
+          style={styles.button}
+          onPress={this.goToSignup.bind(this)}
+          underlayColor="white"
+          >
+          <Text style={styles.buttonText}> SIGN UP </Text>
+        </TouchableHighlight>
       </View>
     )
   }
 };
-
-module.exports = Main;
