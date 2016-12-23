@@ -50,6 +50,13 @@ const styles = StyleSheet.create({
     color: '#F1E4E8'
   },
 
+  separator: {
+    height: 1,
+    backgroundColor: '#E4E4E4',
+    flex: 1,
+    marginLeft: 15
+  },
+
   title: {
     marginBottom: 20,
     fontSize: 25,

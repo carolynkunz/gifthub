@@ -1,32 +1,15 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
+import { ActivityIndicator, InteractionManager, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
 import styles from '../styles/appStyle';
-// import api from '../utils/api';
-// import Dashboard from './Dashboard';
+import api from '../utils/api';
+import Dashboard from './Dashboard';
 
 
 export default class Main extends Component {
   constructor(props) {
     super(props);
-    let headers = new Headers();
-
-    var myInit =
-      { method: 'GET',
-        headers: headers,
-      };
-
-    headers.append("Accept", "application/json");
-
-    fetch('http://localhost:8000/api/users', { headers })
-      .then((res) => res.json())
-      .then(data => console.log(data));
-
-    fetch('http://localhost:8000/recipients', myInit)
-      .then((res) => res.json())
-      .then(data => console.log(data));
-
     this.state = {
-      username: '',
+      first_name: '',
       isLoading: false,
       error: false
     }
@@ -34,23 +17,55 @@ export default class Main extends Component {
 
   handleChange(event) {
     this.setState({
-      username: event.nativeEvent.text
+      first_name: event.nativeEvent.text
     });
   }
 
   handleSubmit() {
-    this.setState({
-      isLoading: true
+    InteractionManager.runAfterInteractions(() => {
+      this.setState({
+        isLoading: true
+      })
     });
-  }
+
+  api.getUsers();
+
+  api.getRecipients();
+
+  // api.getUsersByUsername(this.state.username);
+
+  api.getRecipientsByFirstname(this.state.first_name)
+    .then((res) => {
+      if(res === 'Not Found') {
+        this.setState({
+          error: 'Recipient not found',
+          isLoading: false
+        })
+      } else {
+        this.props.navigator.push({
+          // title: res.first_name || "Select an Option",
+          component: Dashboard,
+          passProps: {userInfo: res}
+        });
+        InteractionManager.runAfterInteractions(() => {
+          this.setState({
+            isLoading: false,
+            error: false,
+            first_name: ''
+          })
+        })
+      }
+  });
+
+}
 
   render() {
     return (
       <View style={styles.mainContainer}>
-        <Text style={styles.title}>Sign In to GiftHub</Text>
+        <Text style={styles.title}>Find Recipient</Text>
         <TextInput
           style={styles.searchInput}
-          value={this.state.username}
+          value={this.state.first_name}
           onChange={this.handleChange.bind(this)}
         />
         <TouchableHighlight
