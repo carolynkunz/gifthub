@@ -11,6 +11,9 @@ export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      firstName: '',
+      lastName: '',
+      email: '',
       username: '',
       password: '',
       isLoggedin: false,
@@ -30,7 +33,15 @@ export default class Main extends Component {
   goToSignup() {
     this.props.navigator.push({
       component: Signup,
-      title: 'Sign Up'
+      title: 'Sign Up',
+      passProps: {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        username: this.state.username,
+        password: this.state.password,
+        isLoggedin: this.state.isLoggedin}
+
     })
   }
 

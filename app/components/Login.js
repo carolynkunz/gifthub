@@ -17,9 +17,7 @@ export default class Login extends Component {
   }
 
   handleSubmit() {
-    let user = {username: this.state.username, password: this.state.password};
-    console.log(user);
-
+    let userLogin = {username: this.state.username, password: this.state.password};
     let url = 'http://localhost:8000/api/token';
     let headers = new Headers();
     let myInit = {
@@ -28,23 +26,45 @@ export default class Login extends Component {
         'Accept' : 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify(userLogin)
     };
 
-    let res=
-      fetch(url, myInit)
-        .then((res) => res.json())
-        .then((resData) => {
-          console.log('resData: ', resData);
+    fetch(url, myInit)
+      .then((res) => {
+        if(res.ok) {
+          return res.json()
+        }
+        return res.text();
+      })
+      .then((resData) => {
+        console.log('userLogin: ', userLogin);
+        console.log('resData: ', resData);
+        if (resData === 'Username must not be blank') {
+          AlertIOS.alert(
+            resData
+          )
+        } else if (resData === 'Password must not be blank') {
+          AlertIOS.alert(
+            resData
+          )
+        } else if (resData === 'Bad username or password') {
+          AlertIOS.alert(
+            resData
+          )
+        } else {
           this.props.navigator.push({
-            // title: username || "Dashboard",
+            title: this.state.username || "Dashboard",
             component: Dashboard,
-            passProps: {username: this.state.username}
+            passProps: {
+              userLogin: this.state.userLogin,
+              userInfo: resData
+            }
           })
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
 
       InteractionManager.runAfterInteractions(() => {
         this.setState({

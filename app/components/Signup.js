@@ -19,7 +19,7 @@ export default class Signup extends Component {
   }
 
   handleSubmit() {
-    let user = {
+    let userSignup = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       email: this.state.email,
@@ -35,23 +35,57 @@ export default class Signup extends Component {
         'Accept' : 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify(userSignup)
     };
 
-    let res =
-      fetch(url, myInit)
-        .then((res) => res.json())
-        .then((resData) => {
-          console.log('resData: ', resData);
+    fetch(url, myInit)
+      .then((res) => {
+        if(res.ok) {
+          return res.json()
+        }
+        return res.text();
+      })
+      .then((resData) => {
+        console.log('userSignup: ', userSignup);
+        console.log('resData: ', resData);
+        if (resData === 'First Name must not be blank') {
+          AlertIOS.alert(
+            resData
+          )
+        } else if (resData === 'First Name must not be blank') {
+          AlertIOS.alert(
+            resData
+          )
+        } else if (resData === 'Email must not be blank') {
+          AlertIOS.alert(
+            resData
+          )
+        } else if (resData === 'Username must not be blank') {
+          AlertIOS.alert(
+            resData
+          )
+        } else if (resData === 'Password must be at least 8 characters long') {
+          AlertIOS.alert(
+            resData
+          )
+        } else if (resData === 'Username already exists') {
+          AlertIOS.alert(
+            resData
+          )
+        } else {
           this.props.navigator.push({
             // title: username || "Dashboard",
             component: Dashboard,
-            passProps: {username: this.state.username}
+            passProps: {
+              userSignup: this.state.userSignup,
+              userInfo: resData
+            }
           })
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
 
     InteractionManager.runAfterInteractions(() => {
       this.setState({

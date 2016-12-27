@@ -58,23 +58,25 @@ export default class Dashboard extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Find Recipient</Text>
-        <TextInput
-          style={styles.searchInput}
-          value={this.state.recipientFirstName}
-          onChange={this.handleChange.bind(this)}
-        />
-        <TouchableHighlight
-          style={styles.button}
-          onPress={this.handleSubmit.bind(this)}
-          underlayColor="white"
-          >
-          <Text style={styles.buttonText}> SUBMIT </Text>
-        </TouchableHighlight>
-        <ActivityIndicator
-          animating={this.state.isLoading}
-          size='large'></ActivityIndicator>
+      <View style={styles.loginContainer}>
+        <View>
+          <Text style={styles.title}>Find Recipient</Text>
+          <TextInput
+            style={styles.searchInput}
+            value={this.state.recipientFirstName}
+            onChange={this.handleChange.bind(this)}
+          />
+          <TouchableHighlight
+            style={styles.button}
+            onPress={this.handleSubmit.bind(this)}
+            underlayColor="white"
+            >
+            <Text style={styles.buttonText}> SUBMIT </Text>
+          </TouchableHighlight>
+          <ActivityIndicator
+            animating={this.state.isLoading}
+            size='large'></ActivityIndicator>
+        </View>
       </View>
     )
   }
