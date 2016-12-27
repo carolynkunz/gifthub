@@ -13,9 +13,38 @@ export default class Signup extends Component {
       email: '',
       username: '',
       password: '',
+      isLoggedin: false,
       isLoading: false,
       error: false
     }
+    console.log('this.state.isLoggedin: ', this.state.isLoggedin);
+  }
+
+  checkIsLoggedIn() {
+    let url = 'http://localhost:8000/api/token';
+    let headers = new Headers();
+    let myInit = {
+      method: "GET",
+      headers: {
+        'Accept' : 'application/json',
+        'Content-Type': 'application/json'
+      }
+    };
+
+    fetch(url, myInit)
+      .then((res) => {
+        if(res.ok) {
+          return res.json()
+        }
+        return res.text();
+      })
+      .then((resData) => {
+        console.log('isLoggedin: ', resData);
+        this.setState({ isLoggedin: resData });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   handleSubmit() {
@@ -69,16 +98,19 @@ export default class Signup extends Component {
             resData
           )
         } else if (resData === 'Username already exists') {
+          console.log(this.state.isLoggedin);
           AlertIOS.alert(
             resData
           )
         } else {
+          this.checkIsLoggedIn();
           this.props.navigator.push({
-            // title: username || "Dashboard",
+            title: this.state.username || "Dashboard",
             component: Dashboard,
             passProps: {
               userSignup: this.state.userSignup,
-              userInfo: resData
+              userInfo: resData,
+              isLoggedin: this.state.isLoggedin
             }
           })
         }
@@ -93,7 +125,8 @@ export default class Signup extends Component {
         lastName: '',
         email: '',
         username: '',
-        password: ''
+        password: '',
+        isLoggedin: false
       })
     })
   }

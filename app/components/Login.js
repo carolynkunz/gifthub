@@ -11,13 +11,46 @@ export default class Login extends Component {
     this.state = {
       username: '',
       password: '',
+      isLoggedin: false,
       isLoading: false,
       error: false
     }
+    console.log('this.state.isLoggedin: ', this.state.isLoggedin);
   }
+
+
+  checkIsLoggedIn() {
+    let url = 'http://localhost:8000/api/token';
+    let headers = new Headers();
+    let myInit = {
+      method: "GET",
+      headers: {
+        'Accept' : 'application/json',
+        'Content-Type': 'application/json'
+      }
+    };
+
+    fetch(url, myInit)
+      .then((res) => {
+        if(res.ok) {
+          return res.json()
+        }
+        return res.text();
+      })
+      .then((resData) => {
+        console.log('isLoggedin: ', resData);
+        this.setState({ isLoggedin: resData });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
+
 
   handleSubmit() {
     let userLogin = {username: this.state.username, password: this.state.password};
+
     let url = 'http://localhost:8000/api/token';
     let headers = new Headers();
     let myInit = {
@@ -39,6 +72,7 @@ export default class Login extends Component {
       .then((resData) => {
         console.log('userLogin: ', userLogin);
         console.log('resData: ', resData);
+
         if (resData === 'Username must not be blank') {
           AlertIOS.alert(
             resData
@@ -52,12 +86,14 @@ export default class Login extends Component {
             resData
           )
         } else {
+          this.checkIsLoggedIn();
           this.props.navigator.push({
             title: this.state.username || "Dashboard",
             component: Dashboard,
             passProps: {
               userLogin: this.state.userLogin,
-              userInfo: resData
+              userInfo: resData,
+              isLoggedin: this.state.isLoggedin
             }
           })
         }
@@ -69,7 +105,8 @@ export default class Login extends Component {
       InteractionManager.runAfterInteractions(() => {
         this.setState({
           username: '',
-          password: ''
+          password: '',
+          isLoggedin: false
         })
       })
   }
