@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, Image, InteractionManager, TouchableHighlight, StyleSheet, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, AlertIOS, Image, InteractionManager, TouchableHighlight, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import styles from '../styles/appStyle';
+import api from '../utils/api';
+import Dashboard from './Dashboard';
+
 
 export default class Login extends Component {
-  // api.userSignin() {
-  //
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      password: '',
+      isLoading: false,
+      error: false
+    }
+  }
 
   handleChangeUsername(event) {
     this.setState({
@@ -19,29 +28,72 @@ export default class Login extends Component {
     });
   }
 
+
   handleSubmit() {
-    InteractionManager.runAfterInteractions(() => {
-      this.setState({
-        isLoading: true
+    let user = {username: this.state.username, password: this.state.password};
+    console.log(user);
+
+    let url = 'http://localhost:8000/api/token';
+    let headers = new Headers();
+    let myInit = {
+      method: "POST",
+      headers: {
+        'Accept' : 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    };
+
+    let res=
+      fetch(url, myInit)
+        .then((res) => res.json())
+        .then((resData) => {
+          console.log('resData: ', resData);
+          if(resData === 'Bad username or password') {
+            console.log(resData);
+            return resData;
+          // } else if (error === 'Password must not be blank') {
+          //   return error;
+          // } else if (error === 'Bad username or password') {
+          //   return error;
+          } else {
+            this.props.navigator.push({
+              // title: username || "Dashboard",
+              component: Dashboard,
+              passProps: {username: this.state.username}
+            });
+          }
+        })
+
+
+
+      InteractionManager.runAfterInteractions(() => {
+        this.setState({
+          username: '',
+          password: ''
+        })
       })
-    })
   }
 
   render() {
     return (
-      <View>
-        <View style={styles.loginContainer}>
-          <Text style={styles.title}>Find Recipient</Text>
+      <View  style={styles.loginContainer}>
+        <View>
           <TextInput
-            defaultValue="Username"
+            autoCapitalize="none"
+            autoCorrect={false}
+            placeholder="Username"
             style={styles.loginTextInput}
-            value={this.props.username}
+            value={this.state.username}
             onChange={this.handleChangeUsername.bind(this)}
           />
+        </View>
+        <View>
           <TextInput
-            defaultValue="Password"
+            placeholder="Password"
             style={styles.loginTextInput}
-            value={this.props.password}
+            secureTextEntry={true}
+            value={this.state.password}
             onChange={this.handleChangePassword.bind(this)}
           />
           <TouchableHighlight

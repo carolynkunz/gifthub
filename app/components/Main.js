@@ -13,6 +13,7 @@ export default class Main extends Component {
     this.state = {
       username: '',
       password: '',
+      isLoggedin: false,
       isLoading: false,
       error: false
     }
@@ -22,7 +23,7 @@ export default class Main extends Component {
     this.props.navigator.push({
       component: Login,
       title: 'Login',
-      passProps: {username: this.state.username, password: this.state.password}
+      passProps: {username: this.state.username, password: this.state.password, isLoggedin: this.state.isLoggedin}
     });
   }
 

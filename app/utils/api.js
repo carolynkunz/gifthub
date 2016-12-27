@@ -1,12 +1,15 @@
 const api = {
-  userSignin() {
+  userSignin(user) {
     let headers = new Headers();
     let myInit =
       { method: 'POST',
-        headers: headers
+        headers: headers,
+        user: {username: `${username}`, password: `${password}`}
       };
 
-    const user = {username: this.props.username, password: this.props.password}
+    // const user = {username: this.state.username, password: this.state.password}
+
+console.log(myInit);
 
     headers.append("Accept", "application/json");
 

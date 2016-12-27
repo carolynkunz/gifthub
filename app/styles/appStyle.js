@@ -9,8 +9,7 @@ const styles = StyleSheet.create({
     borderColor: '#F1E4E8',
     borderWidth: 1,
     borderRadius: 8,
-    marginBottom: 10,
-    marginTop: 10,
+    margin: 10,
     alignSelf: 'stretch',
     justifyContent: 'center'
   },
@@ -18,7 +17,9 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 14,
     color: '#3066BE',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    margin: 5,
+    padding: 5
   },
 
   container: {
@@ -31,23 +32,23 @@ const styles = StyleSheet.create({
   },
 
   loginContainer: {
-    flex: 3,
-    padding: 30,
-    marginTop: 65,
+    flex: 1,
+    marginBottom: 20,
     flexDirection: 'column',
     justifyContent: 'center',
     backgroundColor: '#3066BE'
   },
 
   loginTextInput: {
+    backgroundColor: '#F1E4E8',
     height: 50,
-    paddingTop: 4,
-    marginRight: 5,
+    padding: 4,
+    margin: 10,
     fontSize: 23,
     borderWidth: 1,
     borderColor: 'white',
     borderRadius: 8,
-    color: '#F1E4E8'
+    color: '#3066BE'
   },
 
   mainContainer: {
