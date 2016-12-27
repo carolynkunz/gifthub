@@ -16,19 +16,6 @@ export default class Login extends Component {
     }
   }
 
-  handleChangeUsername(event) {
-    this.setState({
-      username: event.nativeEvent.text
-    });
-  }
-
-  handleChangePassword(event) {
-    this.setState({
-      password: event.nativeEvent.text
-    });
-  }
-
-
   handleSubmit() {
     let user = {username: this.state.username, password: this.state.password};
     console.log(user);
@@ -49,23 +36,15 @@ export default class Login extends Component {
         .then((res) => res.json())
         .then((resData) => {
           console.log('resData: ', resData);
-          if(resData === 'Bad username or password') {
-            console.log(resData);
-            return resData;
-          // } else if (error === 'Password must not be blank') {
-          //   return error;
-          // } else if (error === 'Bad username or password') {
-          //   return error;
-          } else {
-            this.props.navigator.push({
-              // title: username || "Dashboard",
-              component: Dashboard,
-              passProps: {username: this.state.username}
-            });
-          }
+          this.props.navigator.push({
+            // title: username || "Dashboard",
+            component: Dashboard,
+            passProps: {username: this.state.username}
+          })
         })
-
-
+        .catch((err) => {
+          console.error(err);
+        });
 
       InteractionManager.runAfterInteractions(() => {
         this.setState({
@@ -84,8 +63,8 @@ export default class Login extends Component {
             autoCorrect={false}
             placeholder="Username"
             style={styles.loginTextInput}
+            onChangeText={(username) => this.setState({username})}
             value={this.state.username}
-            onChange={this.handleChangeUsername.bind(this)}
           />
         </View>
         <View>
@@ -93,8 +72,8 @@ export default class Login extends Component {
             placeholder="Password"
             style={styles.loginTextInput}
             secureTextEntry={true}
+            onChangeText={(password) => this.setState({password})}
             value={this.state.password}
-            onChange={this.handleChangePassword.bind(this)}
           />
           <TouchableHighlight
             style={styles.button}
