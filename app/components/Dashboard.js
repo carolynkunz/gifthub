@@ -43,7 +43,8 @@ export default class Dashboard extends Component {
           this.props.navigator.push({
             title: res.first_name || "Recipient Profile",
             component: Recipient,
-            passProps: {userInfo: res}
+            passProps: {userInfo: res},
+            isLoading: true
           });
           InteractionManager.runAfterInteractions(() => {
             this.setState({

@@ -39,8 +39,7 @@ export default class Signup extends Component {
         return res.text();
       })
       .then((resData) => {
-        console.log('isLoggedin: ', resData);
-        this.setState({ isLoggedin: resData });
+        return resData
       })
       .catch((err) => {
         console.error(err);
@@ -81,34 +80,46 @@ export default class Signup extends Component {
           AlertIOS.alert(
             resData
           )
+          this.setState({ isLoggedin: false });
+
         } else if (resData === 'First Name must not be blank') {
           AlertIOS.alert(
             resData
           )
+          this.setState({ isLoggedin: false });
+
         } else if (resData === 'Email must not be blank') {
           AlertIOS.alert(
             resData
           )
+          this.setState({ isLoggedin: false });
+
         } else if (resData === 'Username must not be blank') {
           AlertIOS.alert(
             resData
           )
+          this.setState({ isLoggedin: false });
+
         } else if (resData === 'Password must be at least 8 characters long') {
           AlertIOS.alert(
             resData
           )
+          this.setState({ isLoggedin: false });
+
         } else if (resData === 'Username already exists') {
-          console.log(this.state.isLoggedin);
           AlertIOS.alert(
             resData
           )
+          this.setState({ isLoggedin: false });
+
         } else {
-          this.checkIsLoggedIn();
+          this.setState({ isLoggedin: true });
+          console.log(this.state.isLoggedin);
+
           this.props.navigator.push({
             title: this.state.username || "Dashboard",
             component: Dashboard,
             passProps: {
-              userSignup: this.state.userSignup,
               userInfo: resData,
               isLoggedin: this.state.isLoggedin
             }
@@ -118,6 +129,9 @@ export default class Signup extends Component {
       .catch((err) => {
         console.error(err);
       });
+
+      this.checkIsLoggedIn();
+
 
     InteractionManager.runAfterInteractions(() => {
       this.setState({
@@ -132,6 +146,8 @@ export default class Signup extends Component {
   }
 
   render() {
+    console.log('this.state.isLoggedin: ', this.state.isLoggedin);
+
     return (
       <View  style={styles.loginContainer}>
         <View>
