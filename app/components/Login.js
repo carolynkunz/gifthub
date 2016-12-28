@@ -15,7 +15,7 @@ export default class Login extends Component {
       isLoading: false,
       error: false
     }
-    console.log('this.state.isLoggedin: ', this.state.isLoggedin);
+console.log('this.state.isLoggedin: ', this.state.isLoggedin);
   }
 
 
@@ -38,7 +38,8 @@ export default class Login extends Component {
         return res.text();
       })
       .then((resData) => {
-        console.log('isLoggedin: ', resData);
+console.log(resData);
+console.log('isLoggedin: ', resData);
         this.setState({ isLoggedin: resData });
       })
       .catch((err) => {
@@ -50,7 +51,6 @@ export default class Login extends Component {
 
   handleSubmit() {
     let userLogin = {username: this.state.username, password: this.state.password};
-
     let url = 'http://localhost:8000/api/token';
     let headers = new Headers();
     let myInit = {
@@ -70,9 +70,7 @@ export default class Login extends Component {
         return res.text();
       })
       .then((resData) => {
-        console.log('userLogin: ', userLogin);
-        console.log('resData: ', resData);
-
+console.log('resData: ', resData);
         if (resData === 'Username must not be blank') {
           AlertIOS.alert(
             resData
@@ -86,14 +84,13 @@ export default class Login extends Component {
             resData
           )
         } else {
-          this.checkIsLoggedIn();
           this.props.navigator.push({
             title: this.state.username || "Dashboard",
             component: Dashboard,
             passProps: {
-              userLogin: this.state.userLogin,
-              userInfo: resData,
-              isLoggedin: this.state.isLoggedin
+              checkIsLoggedIn: this.checkIsLoggedIn,
+              isLoggedin: this.state.isLoggedin,
+              userInfo: resData
             }
           })
         }
@@ -101,6 +98,10 @@ export default class Login extends Component {
       .catch((err) => {
         console.error(err);
       });
+
+      this.checkIsLoggedIn();
+      console.log(this.state.isLoggedin);
+
 
       InteractionManager.runAfterInteractions(() => {
         this.setState({

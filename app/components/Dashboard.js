@@ -20,8 +20,9 @@ export default class Dashboard extends Component {
 
   handleChange(event) {
     this.setState({
-      recipientFirstName: event.nativeEvent.text
+      recipientFirstName: event.nativeEvent.text,
     });
+
   }
 
   handleSubmit() {
@@ -57,6 +58,7 @@ export default class Dashboard extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <View style={styles.loginContainer}>
         <View>
@@ -81,5 +83,6 @@ export default class Dashboard extends Component {
     )
   }
 };
+
 
 module.exports = Dashboard;

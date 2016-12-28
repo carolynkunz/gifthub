@@ -11,7 +11,8 @@ export default class Recipient extends Component {
     return item[0] ? item[0].toUpperCase() + item.slice(1) : item;
   }
 
-  render(){
+  render() {
+    console.log(this.props);
     let userInfo = this.props.userInfo;
     let topicArr = ['firstName', 'lastName', 'addressLineOne', 'addressLineTwo',
      'addressCity', 'addressState', 'addressZip', 'birthday', 'note'];
