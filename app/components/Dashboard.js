@@ -2,6 +2,8 @@ import { ActivityIndicator, Image, InteractionManager, TouchableHighlight, Style
 import React, { Component } from 'react';
 import api from '../utils/api';
 import Recipient from './Recipient';
+import Login from './Login';
+
 // import Notes from './Notes';
 // import Repositories from './Repositories';
 import styles from '../styles/appStyle';
@@ -58,6 +60,22 @@ export default class Dashboard extends Component {
 
   }
 
+  handleSubmitLogout() {
+    InteractionManager.runAfterInteractions(() => {
+      this.setState({
+        isLoggedin: false
+      })
+    });
+    this.props.navigator.push({
+      // title: res.first_name || "Login",
+      component: Login,
+      // passProps: {userInfo: res},
+      isLoggedin: false,
+      isLoading: true
+    });
+    console.log(this.state.isLoggedin);
+  }
+
   render() {
     console.log(this.props);
     return (
@@ -79,6 +97,13 @@ export default class Dashboard extends Component {
           <ActivityIndicator
             animating={this.state.isLoading}
             size='large'></ActivityIndicator>
+          <TouchableHighlight
+            style={styles.button}
+            onPress={this.handleSubmitLogout.bind(this)}
+            underlayColor="white"
+            >
+            <Text style={styles.buttonText}> LOG OUT </Text>
+          </TouchableHighlight>
         </View>
       </View>
     )
