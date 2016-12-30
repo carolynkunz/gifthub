@@ -18,6 +18,7 @@ console.log(myInit);
       return res;
   },
 
+
   getUsers() {
     let headers = new Headers();
     let myInit =
