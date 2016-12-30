@@ -1,11 +1,9 @@
-import { ActivityIndicator, Image, InteractionManager, TouchableHighlight, StyleSheet, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, Image, InteractionManager, Navigator, TouchableHighlight, StyleSheet, Text, TextInput, View } from 'react-native';
 import React, { Component } from 'react';
 import api from '../utils/api';
 import Recipient from './Recipient';
 import Login from './Login';
-
 // import Notes from './Notes';
-// import Repositories from './Repositories';
 import styles from '../styles/appStyle';
 
 
@@ -61,19 +59,34 @@ export default class Dashboard extends Component {
   }
 
   handleSubmitLogout() {
+      let headers = new Headers();
+      let myInit =
+        { method: 'DELETE',
+          headers: headers
+        };
+
+      headers.append("Accept", "application/json");
+
+      fetch('http://localhost:8000/api/token', myInit)
+        .then((res) => {
+          this.props.checkIsLoggedIn();
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+
+
     InteractionManager.runAfterInteractions(() => {
       this.setState({
         isLoggedin: false
       })
+      console.log(this.state.isLoggedin);
     });
     this.props.navigator.push({
-      // title: res.first_name || "Login",
       component: Login,
-      // passProps: {userInfo: res},
       isLoggedin: false,
       isLoading: true
     });
-    console.log(this.state.isLoggedin);
   }
 
   render() {
@@ -97,14 +110,18 @@ export default class Dashboard extends Component {
           <ActivityIndicator
             animating={this.state.isLoading}
             size='large'></ActivityIndicator>
-          <TouchableHighlight
-            style={styles.button}
-            onPress={this.handleSubmitLogout.bind(this)}
-            underlayColor="white"
-            >
-            <Text style={styles.buttonText}> LOG OUT </Text>
-          </TouchableHighlight>
         </View>
+        <Navigator
+          renderScene={(route, navigator) =>
+            <TouchableHighlight
+              style={styles.button}
+              onPress={this.handleSubmitLogout.bind(this)}
+              underlayColor="white"
+              >
+                <Text style={styles.buttonText}> LOG OUT </Text>
+              </TouchableHighlight>
+          }
+        />
       </View>
     )
   }

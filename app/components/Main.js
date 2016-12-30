@@ -11,48 +11,15 @@ export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedin: false,
       isLoading: false,
       error: false
     }
   }
 
-  // checkIsLoggedIn() {
-  //   let url = 'http://localhost:8000/api/token';
-  //   let headers = new Headers();
-  //   let myInit = {
-  //     method: "GET",
-  //     headers: {
-  //       'Accept' : 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(userLogin)
-  //   };
-  //
-  //   fetch(url, myInit)
-  //     .then((res) => {
-  //       if(res.ok) {
-  //         return res.json()
-  //       }
-  //       return res.text();
-  //     })
-  //     .then((resData) => {
-  //       console.log(resData);
-  //       this.setState({ isLoggedin: resData });
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // }
-
   goToLogin() {
     this.props.navigator.push({
       component: Login,
       title: 'Login',
-      // passProps: {
-      //   checkIsLoggedIn: this.checkIsLoggedIn,
-      //   isLoggedin: this.state.isLoggedin
-      // }
     });
   }
 
@@ -66,8 +33,7 @@ export default class Main extends Component {
         email: this.state.email,
         username: this.state.username,
         password: this.state.password,
-        isLoggedin: this.state.isLoggedin}
-
+      }
     })
   }
 
