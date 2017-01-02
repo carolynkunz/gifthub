@@ -60,6 +60,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#3066BE'
   },
 
+  recipientTextInput: {
+    backgroundColor: '#F1E4E8',
+    height: 30,
+    padding: 4,
+    margin: 10,
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 8,
+    color: '#3066BE'
+  },
+
   searchInput: {
     height: 50,
     padding: 4,

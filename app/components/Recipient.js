@@ -36,6 +36,8 @@ export default class Recipient extends Component {
       <ScrollView style={styles.container}>
         {/* <Badge userInfo={this.props.userInfo}/> */}
         {list}
+
+
       </ScrollView>
     )
   }

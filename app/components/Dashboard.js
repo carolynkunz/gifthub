@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import api from '../utils/api';
 import Recipient from './Recipient';
 import Login from './Login';
-// import Notes from './Notes';
+import NewRecipient from './NewRecipient';
 import styles from '../styles/appStyle';
 
 
@@ -89,8 +89,18 @@ export default class Dashboard extends Component {
     });
   }
 
+  handleSubmitNewRecipient() {
+    this.props.navigator.push({
+      title: "Recipient Profile",
+      component: NewRecipient,
+      passProps: this.props.userInfo,
+      isLoading: true
+    });
+  }
+
+
   render() {
-    console.log(this.props);
+    console.log(this.props.userInfo.id);
     return (
       <View style={styles.loginContainer}>
         <View>
@@ -122,6 +132,15 @@ export default class Dashboard extends Component {
               </TouchableHighlight>
           }
         />
+        <View>
+          <TouchableHighlight
+            style={styles.button}
+            onPress={this.handleSubmitNewRecipient.bind(this)}
+            underlayColor="white"
+            >
+            <Text style={styles.buttonText}> Create New Recipient </Text>
+          </TouchableHighlight>
+        </View>
       </View>
     )
   }

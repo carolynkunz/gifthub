@@ -110,7 +110,7 @@ export default class Login extends Component {
   }
 
   render() {
-    console.log(this.state.isLoggedin);
+    // console.log(this.state.isLoggedin);
     return (
       <View  style={styles.loginContainer}>
         <View>
