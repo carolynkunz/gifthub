@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import styles from '../styles/appStyle';
-// import Badge from './Badge';
+import EditRecipient from './EditRecipient';
+import Dashboard from './Dashboard';
 import Separator from '../helpers/Separator';
 
 
 
 export default class Recipient extends Component {
+
   getRowTitle(recipient, item) {
     return item[0] ? item[0].toUpperCase() + item.slice(1) : item;
+  }
+
+  handleSubmit() {
+    this.props.navigator.push({
+      title: "Edit Recipient",
+      component: EditRecipient,
+      passProps: this.props.userInfo
+    })
   }
 
   render() {
@@ -33,12 +43,17 @@ export default class Recipient extends Component {
       }
     });
     return (
-      <ScrollView style={styles.container}>
-        {/* <Badge userInfo={this.props.userInfo}/> */}
-        {list}
-
-
-      </ScrollView>
+        <ScrollView style={styles.container}>
+          {/* <Badge userInfo={this.props.userInfo}/> */}
+          {list}
+          <TouchableHighlight
+            style={styles.button}
+            onPress={this.handleSubmit.bind(this)}
+            underlayColor="white"
+            >
+              <Text style={styles.buttonText}> Edit Recipient </Text>
+            </TouchableHighlight>
+        </ScrollView>
     )
   }
 };
