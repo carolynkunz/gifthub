@@ -13,7 +13,9 @@ export default class Login extends Component {
       username: '',
       password: '',
       user_id: '',
+      recipientIds: '',
       token: '',
+      userInfo: '',
       userRecipients: [],
       isLoggedin: false,
       isLoading: false,
@@ -73,7 +75,18 @@ export default class Login extends Component {
             resData
           )
         } else {
-          this.setState({userRecipients: resData})
+          console.log('resData: ', resData);
+          this.setState({
+            userRecipients: resData,
+          })
+
+          let mapRecipientIds = this.state.userRecipients.map((item, index) => {
+            return item.id;
+          })
+
+          this.setState({
+            recipientIds: mapRecipientIds,
+          })
 
           this.props.navigator.push({
             title: this.state.username || "Recipients Dashboard",
@@ -82,7 +95,9 @@ export default class Login extends Component {
               checkIsLoggedIn: this.checkIsLoggedIn,
               isLoading: true,
               isLoggedin: this.state.isLoggedin,
-              userInfo: resData,
+              recipientIds: this.state.recipientIds,
+              token: this.state.token,
+              userInfo: this.state.userInfo,
               userRecipients: this.state.userRecipients
             }
           })
@@ -143,9 +158,9 @@ export default class Login extends Component {
           this.setState({
             isLoggedin: true,
             user_id: resData.id,
+            userInfo: resData,
             token: resData.token,
           });
-
           this.getUserRecipients(this.state.token);
         }
       })

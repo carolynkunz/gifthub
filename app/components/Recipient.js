@@ -19,10 +19,12 @@ export default class Recipient extends Component {
       component: EditRecipient,
       passProps: this.props.userInfo
     })
+    console.log(this.props.userInfo);
   }
 
   render() {
     console.log(this.props);
+    console.log('this.props.userInfo: ', this.props.userInfo);
     let userInfo = this.props.userInfo;
     let topicArr = ['firstName', 'lastName', 'addressLineOne', 'addressLineTwo',
      'addressCity', 'addressState', 'addressZip', 'birthday', 'note'];

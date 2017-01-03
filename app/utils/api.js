@@ -70,12 +70,32 @@ console.log(myInit);
       { method: 'GET',
         headers: headers
       };
-    headers.append('Authorization', `Bearer ${token}`);
+    headers.append('Authorization', `Bearer ${this.state.token}`);
     headers.append("Accept", "application/json");
     fetch('http://localhost:8000/recipients', myInit)
       .then((res) => res.json())
 
       return res;
+  },
+
+  getRecipientsById(id) {
+
+    let headers = new Headers();
+    let myInit =
+      { method: 'GET',
+        headers: headers
+      };
+
+    headers.append("Accept", "application/json");
+
+    let url = `http://localhost:8000/recipients/${id}`;
+    let res =
+      fetch(url, myInit)
+        .then((res) => {
+          return res.json()
+        });
+
+        return res;
   },
 
 

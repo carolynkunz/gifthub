@@ -14,19 +14,22 @@ export default class EditRecipient extends Component {
       addressLineTwo: this.props.addressLineTwo,
       addressCity: this.props.addressCity,
       addressState: this.props.addressState,
-      addressZip: this.props.addressState,
+      addressZip: this.props.addressZip,
       birthday: this.props.birthday,
       note: this.props.note,
-      userInfo: this.props,
+      userId: this.props.userId,
+      userInfo: this.props.userInfo,
       // isLoggedin: false,
       isLoading: false,
       error: false
     }
+
+    console.log(this.state);
   }
 
   handleSubmit() {
     let editRecipient = {
-      userId: this.state.userInfo.id,
+      userId: this.props.userId,
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       addressLineOne: this.state.addressLineOne,
@@ -51,12 +54,16 @@ export default class EditRecipient extends Component {
 
     fetch(url, myInit)
       .then((res) => {
+        console.log(res);
         if(res.ok) {
           return res.json()
         }
         return res.text();
       })
       .then((resData) => {
+        console.log(resData);
+        this.setState({ userInfo: resData });
+
         this.props.navigator.push({
           title: this.state.username || "Recipient",
           component: Recipient,
@@ -88,6 +95,7 @@ export default class EditRecipient extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <View  style={styles.loginContainer}>
         <View>

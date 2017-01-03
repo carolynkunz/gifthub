@@ -80,7 +80,6 @@ export default class Dashboard extends Component {
       this.setState({
         isLoggedin: false
       })
-      console.log(this.state.isLoggedin);
     });
     this.props.navigator.push({
       component: Login,
@@ -100,7 +99,7 @@ export default class Dashboard extends Component {
 
 
   render() {
-    console.log(this.props.userInfo.id);
+    // console.log(this.props);
     return (
       <View style={styles.loginContainer}>
         <View>
