@@ -32,7 +32,7 @@ export default class Dashboard extends Component {
       })
     });
 
-    api.getRecipientsByFirstname(this.state.recipientFirstName)
+    api.getRecipientsByFirstname(this.state.recipientFirstName, this.props.userInfo.token)
       .then((res) => {
         if(res === 'Not Found') {
           this.setState({

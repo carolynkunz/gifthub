@@ -3,6 +3,8 @@ import { ActivityIndicator, AlertIOS, Image, InteractionManager, TouchableHighli
 import styles from '../styles/appStyle';
 import api from '../utils/api';
 import Dashboard from './Dashboard';
+import RecipientsDashboard from './RecipientsDashboard';
+
 
 export default class Login extends Component {
   constructor(props) {
@@ -10,6 +12,9 @@ export default class Login extends Component {
     this.state = {
       username: '',
       password: '',
+      user_id: '',
+      token: '',
+      userRecipients: [],
       isLoggedin: false,
       isLoading: false,
       error: false
@@ -41,6 +46,42 @@ export default class Login extends Component {
         console.error(err);
       });
   }
+
+  getUserRecipients() {
+    const token = this.state.token;
+    let url = 'http://localhost:8000/api/recipients'
+
+    let headers = new Headers();
+    let myInit = {
+      method: 'GET',
+      headers: {
+        'Accept' : 'application/json',
+        'Authorization': `Bearer ${this.state.token}`
+      },
+    };
+
+    fetch(url, myInit)
+      .then((res) => {
+        if(res.ok) {
+          return res.json()
+        }
+        return res.text();
+      })
+      .then((resData) => {
+        if (resData === 'Unauthorized') {
+          AlertIOS.alert(
+            resData
+          )
+        } else {
+          this.setState({userRecipients: resData})
+          console.log(resData);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
 
   handleSubmit() {
     let userLogin = {username: this.state.username, password: this.state.password};
@@ -80,7 +121,15 @@ export default class Login extends Component {
           )
           this.setState({ isLoggedin: false });
         } else {
-          this.setState({ isLoggedin: true });
+          this.setState({
+            isLoggedin: true,
+            user_id: resData.id,
+            token: resData.token,
+            userRecipients: this.state.userRecipients
+          });
+
+          this.getUserRecipients(this.state.token);
+
           this.props.navigator.push({
             title: this.state.username || "Dashboard",
             component: Dashboard,
@@ -88,7 +137,8 @@ export default class Login extends Component {
               checkIsLoggedIn: this.checkIsLoggedIn,
               isLoading: true,
               isLoggedin: this.state.isLoggedin,
-              userInfo: resData
+              userInfo: resData,
+              userRecipients: this.state.userRecipients
             }
           })
         }
@@ -98,7 +148,6 @@ export default class Login extends Component {
       });
 
       this.checkIsLoggedIn();
-
 
       InteractionManager.runAfterInteractions(() => {
         this.setState({
@@ -110,7 +159,6 @@ export default class Login extends Component {
   }
 
   render() {
-    // console.log(this.state.isLoggedin);
     return (
       <View  style={styles.loginContainer}>
         <View>
@@ -146,6 +194,5 @@ export default class Login extends Component {
     )
   }
 };
-
 
 module.exports = Login;

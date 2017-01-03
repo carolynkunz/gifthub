@@ -50,13 +50,27 @@ console.log(myInit);
       return res;
   },
 
-  getRecipients() {
+  getUserRecipients() {
     let headers = new Headers();
     let myInit =
       { method: 'GET',
         headers: headers
       };
 
+    headers.append("Accept", "application/json");
+    fetch(`http://localhost:8000/user/recipients/${userId}`, myInit)
+      .then((res) => res.json())
+
+      return res;
+  },
+
+  getRecipients(token) {
+    let headers = new Headers();
+    let myInit =
+      { method: 'GET',
+        headers: headers
+      };
+    headers.append('Authorization', `Bearer ${token}`);
     headers.append("Accept", "application/json");
     fetch('http://localhost:8000/recipients', myInit)
       .then((res) => res.json())
@@ -65,9 +79,10 @@ console.log(myInit);
   },
 
 
-  getRecipientsByFirstname(first_name) {
+  getRecipientsByFirstname(first_name, token) {
 
     let headers = new Headers();
+    headers.append('Authorization', `Bearer ${token}`);
     let myInit =
       { method: 'GET',
         headers: headers
