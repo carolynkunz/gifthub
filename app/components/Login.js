@@ -74,12 +74,31 @@ export default class Login extends Component {
           )
         } else {
           this.setState({userRecipients: resData})
-          console.log(resData);
+
+          this.props.navigator.push({
+            title: this.state.username || "Recipients Dashboard",
+            component: RecipientsDashboard,
+            passProps: {
+              checkIsLoggedIn: this.checkIsLoggedIn,
+              isLoading: true,
+              isLoggedin: this.state.isLoggedin,
+              userInfo: resData,
+              userRecipients: this.state.userRecipients
+            }
+          })
         }
       })
       .catch((err) => {
         console.error(err);
       });
+
+      InteractionManager.runAfterInteractions(() => {
+        this.setState({
+          username: '',
+          password: '',
+          isLoggedin: false
+        })
+      })
   }
 
 
@@ -125,22 +144,9 @@ export default class Login extends Component {
             isLoggedin: true,
             user_id: resData.id,
             token: resData.token,
-            userRecipients: this.state.userRecipients
           });
 
           this.getUserRecipients(this.state.token);
-
-          this.props.navigator.push({
-            title: this.state.username || "Dashboard",
-            component: Dashboard,
-            passProps: {
-              checkIsLoggedIn: this.checkIsLoggedIn,
-              isLoading: true,
-              isLoggedin: this.state.isLoggedin,
-              userInfo: resData,
-              userRecipients: this.state.userRecipients
-            }
-          })
         }
       })
       .catch((err) => {
@@ -148,14 +154,6 @@ export default class Login extends Component {
       });
 
       this.checkIsLoggedIn();
-
-      InteractionManager.runAfterInteractions(() => {
-        this.setState({
-          username: '',
-          password: '',
-          isLoggedin: false
-        })
-      })
   }
 
   render() {

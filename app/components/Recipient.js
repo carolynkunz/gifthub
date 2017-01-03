@@ -28,7 +28,7 @@ export default class Recipient extends Component {
      'addressCity', 'addressState', 'addressZip', 'birthday', 'note'];
 
     let list = topicArr.map((item, index) => {
-      if(!userInfo[item]){
+      if(!userInfo[item]) {
         return <View key={index}/>
       } else {
         return (

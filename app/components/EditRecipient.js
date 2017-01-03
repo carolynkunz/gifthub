@@ -22,7 +22,6 @@ export default class EditRecipient extends Component {
       isLoading: false,
       error: false
     }
-    console.log(this.state);
   }
 
   handleSubmit() {
@@ -38,8 +37,6 @@ export default class EditRecipient extends Component {
       birthday: this.state.birthday,
       note: this.state.note
     };
-
-    console.log('editRecipient: ', editRecipient);
 
     let url = `http://localhost:8000/recipients/${this.state.id}`;
     let headers = new Headers();
@@ -91,7 +88,6 @@ export default class EditRecipient extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <View  style={styles.loginContainer}>
         <View>
