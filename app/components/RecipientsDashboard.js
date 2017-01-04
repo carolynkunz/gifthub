@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Image, InteractionManager, ScrollView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import Recipient from './Recipient';
 import ActionButton from 'react-native-action-button';
+import NewRecipient from './NewRecipient';
 import Separator from '../helpers/Separator';
 import api from '../utils/api';
 
@@ -53,6 +54,15 @@ export default class RecipientsDashboard extends Component {
     });
   }
 
+  handleSubmitNewRecipient() {
+    this.props.navigator.push({
+      title: "Recipient Profile",
+      component: NewRecipient,
+      passProps: this.props.userInfo,
+      isLoading: true
+    });
+  }
+
 
   render() {
     let recipientNames = this.state.recipientInfo.map((item, index) => {
@@ -65,10 +75,10 @@ export default class RecipientsDashboard extends Component {
               >
             <Text style={styles.profileRowContent}> {item.first_name + ' ' + item.last_name} </Text>
             </TouchableHighlight>
-            <ActionButton
+            {/* <ActionButton
               buttonColor="rgba(231,76,60,1)"
               onPress={this.handleSubmit.bind(this)}
-            />
+            /> */}
           </View>
           <Separator />
         </View>
@@ -79,6 +89,16 @@ export default class RecipientsDashboard extends Component {
       <ScrollView style={styles.container}>
         <Text>This is the Recipient Dashboard</Text>
         {recipientNames}
+
+        <View>
+          <TouchableHighlight
+            style={styles.button}
+            onPress={this.handleSubmitNewRecipient.bind(this)}
+            underlayColor="white"
+            >
+            <Text style={styles.buttonText}> Create New Recipient </Text>
+          </TouchableHighlight>
+        </View>
       </ScrollView>
     )
   }

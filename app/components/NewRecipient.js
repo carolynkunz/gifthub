@@ -60,8 +60,8 @@ export default class NewRecipient extends Component {
       })
       .then((resData) => {
         this.props.navigator.push({
-          title: this.state.username || "Dashboard",
-          component: Dashboard,
+          title: this.state.username || " Recipient Dashboard",
+          component: RecipientsDashboard,
           passProps: {
             userInfo: resData,
             isLoggedin: this.state.isLoggedin

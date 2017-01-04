@@ -6,9 +6,8 @@
 
 import React, { Component } from 'react';
 import { AppRegistry, NavigatorIOS, StyleSheet, Text, View} from 'react-native';
-import Main from './app/components/Main';
 import Dashboard from './app/components/Dashboard';
-
+import Main from './app/components/Main';
 import styles from './app/styles/appStyle';
 
 

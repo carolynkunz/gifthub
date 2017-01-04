@@ -75,7 +75,6 @@ export default class Login extends Component {
             resData
           )
         } else {
-          console.log('resData: ', resData);
           this.setState({
             userRecipients: resData,
           })
