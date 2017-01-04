@@ -24,7 +24,7 @@ export default class Login extends Component {
   }
 
   checkIsLoggedIn() {
-    let url = 'http://localhost:8000/api/token';
+    let url = 'https://carolynkunz-gifthub.herokuapp.com/api/token';
     let headers = new Headers();
     let myInit = {
       method: "GET",
@@ -51,7 +51,7 @@ export default class Login extends Component {
 
   getUserRecipients() {
     const token = this.state.token;
-    let url = 'http://localhost:8000/api/recipients'
+    let url = 'https://carolynkunz-gifthub.herokuapp.com/api/recipients'
 
     let headers = new Headers();
     let myInit = {
@@ -118,7 +118,7 @@ export default class Login extends Component {
 
   handleSubmit() {
     let userLogin = {username: this.state.username, password: this.state.password};
-    let url = 'http://localhost:8000/api/token';
+    let url = 'https://carolynkunz-gifthub.herokuapp.com/api/token';
     let headers = new Headers();
     let myInit = {
       method: "POST",

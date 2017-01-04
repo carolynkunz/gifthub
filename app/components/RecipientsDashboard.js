@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, InteractionManager, ScrollView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { Image, InteractionManager, Modal, ScrollView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import Recipient from './Recipient';
 import ActionButton from 'react-native-action-button';
 import NewRecipient from './NewRecipient';

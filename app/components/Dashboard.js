@@ -67,7 +67,7 @@ export default class Dashboard extends Component {
 
       headers.append("Accept", "application/json");
 
-      fetch('http://localhost:8000/api/token', myInit)
+      fetch('https://carolynkunz-gifthub.herokuapp.com/api/token', myInit)
         .then((res) => {
           this.props.checkIsLoggedIn();
         })

@@ -21,7 +21,7 @@ export default class Signup extends Component {
   }
 
   checkIsLoggedIn() {
-    let url = 'http://localhost:8000/api/token';
+    let url = 'https://carolynkunz-gifthub.herokuapp.com/api/token';
     let headers = new Headers();
     let myInit = {
       method: "GET",
@@ -55,7 +55,7 @@ export default class Signup extends Component {
       password: this.state.password
     };
 
-    let url = 'http://localhost:8000/api/users';
+    let url = 'https://carolynkunz-gifthub.herokuapp.com/api/users';
     let headers = new Headers();
     let myInit = {
       method: "POST",

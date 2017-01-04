@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InteractionManager, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
+import { InteractionManager, Modal, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
 import Recipient from './Recipient';
 import styles from '../styles/appStyle';
 
@@ -41,7 +41,7 @@ export default class EditRecipient extends Component {
       note: this.state.note
     };
 
-    let url = `http://localhost:8000/recipients/${this.state.id}`;
+    let url = `https://carolynkunz-gifthub.herokuapp.com/recipients/${this.state.id}`;
     let headers = new Headers();
     let myInit = {
       method: "PATCH",

@@ -13,7 +13,7 @@ console.log(myInit);
 
     headers.append("Accept", "application/json");
 
-    fetch('http://localhost:8000/api/token', myInit)
+    fetch('https://carolynkunz-gifthub.herokuapp.com/api/token', myInit)
       .then((res) => res.json())
       return res;
   },
@@ -28,7 +28,7 @@ console.log(myInit);
 
     headers.append("Accept", "application/json");
 
-    fetch('http://localhost:8000/api/users', myInit)
+    fetch('https://carolynkunz-gifthub.herokuapp.com/api/users', myInit)
       .then((res) => res.json())
       return res;
   },
@@ -44,7 +44,7 @@ console.log(myInit);
 
     headers.append("Accept", "application/json");
 
-    fetch(`http://localhost:8000/api/users/${username}`, myInit)
+    fetch(`https://carolynkunz-gifthub.herokuapp.com/api/users/${username}`, myInit)
       .then((res) => res.json())
 
       return res;
@@ -58,7 +58,7 @@ console.log(myInit);
       };
 
     headers.append("Accept", "application/json");
-    fetch(`http://localhost:8000/user/recipients/${userId}`, myInit)
+    fetch(`https://carolynkunz-gifthub.herokuapp.com/user/recipients/${userId}`, myInit)
       .then((res) => res.json())
 
       return res;
@@ -72,7 +72,7 @@ console.log(myInit);
       };
     headers.append('Authorization', `Bearer ${this.state.token}`);
     headers.append("Accept", "application/json");
-    fetch('http://localhost:8000/recipients', myInit)
+    fetch('https://carolynkunz-gifthub.herokuapp.com/recipients', myInit)
       .then((res) => res.json())
 
       return res;
@@ -88,7 +88,7 @@ console.log(myInit);
 
     headers.append("Accept", "application/json");
 
-    let url = `http://localhost:8000/recipients/${id}`;
+    let url = `https://carolynkunz-gifthub.herokuapp.com/recipients/${id}`;
     let res =
       fetch(url, myInit)
         .then((res) => {
@@ -110,7 +110,7 @@ console.log(myInit);
 
     headers.append("Accept", "application/json");
 
-    let url = `http://localhost:8000/recipients/${first_name}`;
+    let url = `https://carolynkunz-gifthub.herokuapp.com/recipients/${first_name}`;
     let res =
       fetch(url, myInit)
         .then((res) => res.json());

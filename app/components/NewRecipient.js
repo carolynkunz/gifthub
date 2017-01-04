@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { InteractionManager, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
-import Dashboard from './Dashboard';
+import Recipient from './Recipient';
 import styles from '../styles/appStyle';
 
 export default class NewRecipient extends Component {
@@ -28,19 +28,19 @@ export default class NewRecipient extends Component {
     let newRecipient = {
       userId: this.state.userInfo.id,
       firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      addressLineOne: this.state.addressLineOne,
-      addressLineTwo: this.state.addressLineTwo,
-      addressCity: this.state.addressCity,
-      addressState: this.state.addressState,
-      addressZip: this.state.addressZip,
+      lastName: this.state.lastName || undefined,
+      addressLineOne: this.state.addressLineOne || undefined,
+      addressLineTwo: this.state.addressLineTwo || undefined,
+      addressCity: this.state.addressCity || undefined,
+      addressState: this.state.addressState || undefined,
+      addressZip: this.state.addressZip || undefined,
       birthday: this.state.birthday,
       note: this.state.note
     };
 
     console.log('newRecipient: ', newRecipient);
 
-    let url = 'http://localhost:8000/recipients';
+    let url = 'https://carolynkunz-gifthub.herokuapp.com/recipients';
     let headers = new Headers();
     let myInit = {
       method: "POST",
@@ -59,9 +59,11 @@ export default class NewRecipient extends Component {
         return res.text();
       })
       .then((resData) => {
+        this.setState({ userInfo: resData });
+
         this.props.navigator.push({
-          title: this.state.username || " Recipient Dashboard",
-          component: RecipientsDashboard,
+          title: this.state.username || " Recipient",
+          component: Recipient,
           passProps: {
             userInfo: resData,
             isLoggedin: this.state.isLoggedin
@@ -183,7 +185,7 @@ export default class NewRecipient extends Component {
             onPress={this.handleSubmit.bind(this)}
             underlayColor="white"
             >
-            <Text style={styles.buttonText}> SUBMIT </Text>
+            <Text style={styles.buttonText}> CREATE RECIPIENT </Text>
           </TouchableHighlight>
         </View>
       </View>
