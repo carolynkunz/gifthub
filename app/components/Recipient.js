@@ -3,6 +3,7 @@ import { Image, Modal, ScrollView, StyleSheet, Text, TextInput, TouchableHighlig
 import styles from '../styles/appStyle';
 import Dashboard from './Dashboard';
 import EditRecipient from './EditRecipient';
+import Reminders from './Reminders';
 import RNCalendarReminders from 'react-native-calendar-reminders';
 import Separator from '../helpers/Separator';
 
@@ -21,30 +22,31 @@ export default class Recipient extends Component {
 
  setModalVisible(visible) {
    this.setState({modalVisible: visible});
-
-   RNCalendarReminders.authorizeEventStore()
-    .then((status) => {
-      console.log('authorizing EventStore...');
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-
-    const firstName = this.props.userInfo.firstName;
-
-     RNCalendarReminders.saveReminder(firstName, {
-       location: '',
-       notes: this.state.reminderNotes,
-       startDate: this.state.date,
-       dueDate: this.state.dueDate,
-       alarms: [{
-         date: -1 // or absolute date
-       }],
-       recurrence: 'weekly',
-      //  recurrenceInterval: '2'
-     });
-
  }
+ //
+ //   RNCalendarReminders.authorizeEventStore()
+ //    .then((status) => {
+ //      console.log('authorizing EventStore...');
+ //    })
+ //    .catch((err) => {
+ //      console.error(err);
+ //    })
+ //
+ //    const firstName = this.props.userInfo.firstName;
+ //
+ //     RNCalendarReminders.saveReminder(firstName, {
+ //       location: '',
+ //       notes: this.state.reminderNotes,
+ //       startDate: this.state.date,
+ //       dueDate: this.state.dueDate,
+ //       alarms: [{
+ //         date: -1 // or absolute date
+ //       }],
+ //       recurrence: 'weekly',
+ //      //  recurrenceInterval: '2'
+ //     });
+ //
+ // }
 
   getRowTitle(recipient, item) {
     return item[0] ? item[0].toUpperCase() + item.slice(1) : item;
@@ -99,7 +101,11 @@ export default class Recipient extends Component {
               visible={this.state.modalVisible}
               onRequestClose={() => {alert("Modal has been closed.")}}
             >
-                <View style={{marginTop: 22}}>
+              <Reminders
+                passProps
+              />
+
+                {/* <View style={{marginTop: 22}}>
                   <View>
                     <Text>Create Reminder</Text>
 
@@ -130,6 +136,10 @@ export default class Recipient extends Component {
                       />
                     </View>
 
+                    <View>
+                      <Reminders />
+                    </View>
+
                     <TouchableHighlight
                       style={styles.button}
                       underlayColor="white"
@@ -141,7 +151,7 @@ export default class Recipient extends Component {
                   </TouchableHighlight>
 
                 </View>
-              </View>
+              </View> */}
             </Modal>
 
             <TouchableHighlight
