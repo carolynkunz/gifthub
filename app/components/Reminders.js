@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { DatePickerIOS, Modal, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
+import DatePicker from './DatePicker';
 import RNCalendarReminders from 'react-native-calendar-reminders';
 import styles from '../styles/appStyle';
 
@@ -7,8 +8,8 @@ export default class Reminders extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      startDate: '2016-10-01T09:45:00.000UTC',
-      dueDate: '2016-10-01T09:45:00.000UTC',
+      startDate: new Date(Date.UTC(96, 11, 1, 0, 0, 0)),
+      dueDate: new Date(Date.UTC(96, 11, 1, 0, 0, 0)),
       reminderNotes: '',
       modalVisible: false
     }
@@ -18,56 +19,64 @@ export default class Reminders extends Component {
     this.setState({modalVisible: visible});
 
     RNCalendarReminders.authorizeEventStore()
-     .then((status) => {
-       console.log('authorizing EventStore...');
-     })
-     .catch((err) => {
-       console.error(err);
-     })
+      .then((status) => {
+        console.log('authorizing EventStore...');
 
-      RNCalendarReminders.saveReminder(this.props.passProps.firstName, {
-        location: '',
-        notes: this.state.reminderNotes,
-        startDate: this.state.startDate,
-        dueDate: this.state.dueDate,
-        alarms: [{
-          date: -1 // or absolute date
-        }],
-        recurrence: 'weekly',
-       //  recurrenceInterval: '2'
-      });
+        RNCalendarReminders.saveReminder('GiftHub Reminder for: ' + this.props.passProps.firstName, {
+          location: '',
+          notes: this.state.reminderNotes,
+          startDate: this.state.startDate,
+          dueDate: this.state.dueDate,
+          alarms: [{
+            date: -1 // or absolute date
+          }]
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+
+    this.props.onRequestClose();
 
   }
 
   render() {
     return (
-      <Modal
-        animationType={"slide"}
-        transparent={false}
-        visible={this.state.modalVisible}
-        onRequestClose={() => {alert("Modal has been closed.")}}
-      >
       <View style={{marginTop: 22}}>
         <View>
           <Text>Create Reminder</Text>
 
-          <View>
+          {/* <View>
             <TextInput
               placeholder="Date"
               style={styles.recipientTextInput}
               onChangeText={(startDate) => this.setState({startDate})}
               value={this.state.startDate}
             />
-          </View>
-
-          <View>
+          </View> */}
+          {/* <View>
             <TextInput
               placeholder="Due Date"
               style={styles.recipientTextInput}
               onChangeText={(dueDate) => this.setState({dueDate})}
               value={this.state.dueDate}
             />
+          </View> */}
+
+          <View>
+            <Text>Start Date</Text>
+            <DatePicker
+              onDateChange={(startDate) => this.setState({startDate})}
+            />
           </View>
+
+          <View>
+            <Text>Due Date</Text>
+            <DatePicker
+              onDateChange={(dueDate) => this.setState({dueDate})}
+            />
+          </View>
+
 
           <View>
             <TextInput
@@ -85,12 +94,11 @@ export default class Reminders extends Component {
             this.setModalVisible(!this.state.modalVisible)
           }}>
 
-          <Text>Add Reminder</Text>
+          <Text>Save Reminder</Text>
         </TouchableHighlight>
 
       </View>
     </View>
-    </Modal>
     )
   }
 };
