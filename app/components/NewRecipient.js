@@ -185,7 +185,7 @@ export default class NewRecipient extends Component {
             onPress={this.handleSubmit.bind(this)}
             underlayColor="white"
             >
-            <Text style={styles.buttonText}> CREATE RECIPIENT </Text>
+            <Text style={styles.buttonText}> SAVE RECIPIENT </Text>
           </TouchableHighlight>
         </View>
       </View>

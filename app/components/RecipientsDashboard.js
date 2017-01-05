@@ -56,7 +56,7 @@ export default class RecipientsDashboard extends Component {
 
   handleSubmitNewRecipient() {
     this.props.navigator.push({
-      title: "Recipient Profile",
+      title: "New Recipient",
       component: NewRecipient,
       passProps: this.props.userInfo,
       isLoading: true
@@ -87,7 +87,7 @@ export default class RecipientsDashboard extends Component {
 
     return (
       <ScrollView style={styles.container}>
-        <Text>This is the Recipient Dashboard</Text>
+
         {recipientNames}
 
         <View>

@@ -7,8 +7,6 @@ import Reminders from './Reminders';
 import RNCalendarReminders from 'react-native-calendar-reminders';
 import Separator from '../helpers/Separator';
 
-
-
 export default class Recipient extends Component {
   constructor(props) {
     super(props);
@@ -20,38 +18,34 @@ export default class Recipient extends Component {
     }
   }
 
- setModalVisible(visible) {
-   this.setState({modalVisible: visible});
- }
- //
- //   RNCalendarReminders.authorizeEventStore()
- //    .then((status) => {
- //      console.log('authorizing EventStore...');
- //    })
- //    .catch((err) => {
- //      console.error(err);
- //    })
- //
- //    const firstName = this.props.userInfo.firstName;
- //
- //     RNCalendarReminders.saveReminder(firstName, {
- //       location: '',
- //       notes: this.state.reminderNotes,
- //       startDate: this.state.date,
- //       dueDate: this.state.dueDate,
- //       alarms: [{
- //         date: -1 // or absolute date
- //       }],
- //       recurrence: 'weekly',
- //      //  recurrenceInterval: '2'
- //     });
- //
- // }
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
+
+    RNCalendarReminders.authorizeEventStore()
+     .then((status) => {
+       console.log('authorizing EventStore...');
+     })
+     .catch((err) => {
+       console.error(err);
+     })
+
+      RNCalendarReminders.saveReminder('GiftHub Reminder for: ' + this.props.userInfo.firstName, {
+        location: '',
+        notes: this.state.reminderNotes,
+        startDate: this.state.date,
+        dueDate: this.state.dueDate,
+        alarms: [{
+          date: -1 // or absolute date
+        }],
+        recurrence: 'weekly',
+       //  recurrenceInterval: '2'
+      });
+
+  }
 
   getRowTitle(recipient, item) {
     return item[0] ? item[0].toUpperCase() + item.slice(1) : item;
   }
-
 
   handleSubmit() {
     this.props.navigator.push({
@@ -59,12 +53,10 @@ export default class Recipient extends Component {
       component: EditRecipient,
       passProps: this.props.userInfo
     })
-    // console.log(this.props.userInfo);
   }
 
   render() {
-    console.log('this.props: ', this.props);
-    console.log('this.props.userInfo: ', this.props.userInfo);
+    console.log(this.props);
     let userInfo = this.props.userInfo;
     let topicArr = ['firstName', 'lastName', 'addressLineOne', 'addressLineTwo',
      'addressCity', 'addressState', 'addressZip', 'birthday', 'note'];
@@ -101,57 +93,50 @@ export default class Recipient extends Component {
               visible={this.state.modalVisible}
               onRequestClose={() => {alert("Modal has been closed.")}}
             >
-              <Reminders
-                passProps
-              />
+              <Reminders />
+              <View style={{marginTop: 22}}>
+                <View>
+                  <Text>Create Reminder</Text>
 
-                {/* <View style={{marginTop: 22}}>
                   <View>
-                    <Text>Create Reminder</Text>
+                    <TextInput
+                      placeholder="Date"
+                      style={styles.recipientTextInput}
+                      onChangeText={(date) => this.setState({date})}
+                      value={this.state.date}
+                    />
+                  </View>
 
-                    <View>
-                      <TextInput
-                        placeholder="Date"
-                        style={styles.recipientTextInput}
-                        onChangeText={(date) => this.setState({date})}
-                        value={this.state.date}
-                      />
-                    </View>
+                  <View>
+                    <TextInput
+                      placeholder="Due Date"
+                      style={styles.recipientTextInput}
+                      onChangeText={(dueDate) => this.setState({dueDate})}
+                      value={this.state.dueDate}
+                    />
+                  </View>
 
-                    <View>
-                      <TextInput
-                        placeholder="Due Date"
-                        style={styles.recipientTextInput}
-                        onChangeText={(dueDate) => this.setState({dueDate})}
-                        value={this.state.dueDate}
-                      />
-                    </View>
+                  <View>
+                    <TextInput
+                      placeholder="Reminder Notes"
+                      style={styles.recipientTextInput}
+                      onChangeText={(reminderNotes) => this.setState({reminderNotes})}
+                      value={this.state.reminderNotes}
+                    />
+                  </View>
 
-                    <View>
-                      <TextInput
-                        placeholder="Reminder Notes"
-                        style={styles.recipientTextInput}
-                        onChangeText={(reminderNotes) => this.setState({reminderNotes})}
-                        value={this.state.reminderNotes}
-                      />
-                    </View>
+                  <TouchableHighlight
+                    style={styles.button}
+                    underlayColor="white"
+                    onPress={() => {
+                    this.setModalVisible(!this.state.modalVisible)
+                  }}>
 
-                    <View>
-                      <Reminders />
-                    </View>
+                  <Text>Add Reminder</Text>
+                </TouchableHighlight>
 
-                    <TouchableHighlight
-                      style={styles.button}
-                      underlayColor="white"
-                      onPress={() => {
-                      this.setModalVisible(!this.state.modalVisible)
-                    }}>
-
-                    <Text>Hide Modal</Text>
-                  </TouchableHighlight>
-
-                </View>
-              </View> */}
+              </View>
+            </View>
             </Modal>
 
             <TouchableHighlight
@@ -161,6 +146,7 @@ export default class Recipient extends Component {
               this.setModalVisible(true)
             }}>
             <Text>Add Reminder</Text>
+
           </TouchableHighlight>
         </ScrollView>
       )
