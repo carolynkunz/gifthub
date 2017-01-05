@@ -68,7 +68,7 @@ export default class Reminders extends Component {
         RNCalendarReminders.saveReminder('GiftHub Reminder for: ' + this.props.passProps.firstName, {
           location: '',
           notes: this.state.reminderNotes,
-          date: date,
+          date: this.state.date,
           alarms: [{
             date: -1 // or absolute date
           }]
@@ -90,7 +90,20 @@ export default class Reminders extends Component {
     return (
       <ScrollView contentContainerStyle={styles.scrollviewContainer}>
         <View>
-          <Text style={styles.buttonText}>Create Reminder</Text>
+          <Text style={styles.buttonText}>Create a Gift Reminder</Text>
+
+          <Separator />
+
+          <View>
+            <Text style={styles.buttonText}>Start Date</Text>
+            <DatePicker
+              onDateChange={this.onDateChange.bind(this)}
+
+              // onDateChange={(date) => this.setState({date})}
+            />
+          </View>
+
+          <Separator />
 
           {/* <View>
             <TextInput
@@ -110,24 +123,15 @@ export default class Reminders extends Component {
           </View> */}
 
           <View>
-            <Text style={styles.buttonText}>Start Date</Text>
-            <DatePicker
-              onDateChange={this.onDateChange.bind(this)}
-
-              // onDateChange={(date) => this.setState({date})}
-            />
-          </View>
-
-          <Separator />
-
-          <View>
             <TextInput
-              placeholder="Reminder Notes"
+              placeholder="Reminder notes for your gifting plans"
               style={styles.recipientTextInput}
               onChangeText={(reminderNotes) => this.setState({reminderNotes})}
               value={this.state.reminderNotes}
             />
           </View>
+
+          <Separator />
 
           <TouchableHighlight
             style={styles.button}

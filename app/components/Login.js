@@ -106,13 +106,13 @@ export default class Login extends Component {
         console.error(err);
       });
 
-      InteractionManager.runAfterInteractions(() => {
-        this.setState({
-          username: '',
-          password: '',
-          isLoggedin: false
-        })
-      })
+      // InteractionManager.runAfterInteractions(() => {
+      //   this.setState({
+      //     username: '',
+      //     password: '',
+      //     isLoggedin: false
+      //   })
+      // })
   }
 
 

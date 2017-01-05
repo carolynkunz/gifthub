@@ -149,6 +149,27 @@ const styles = StyleSheet.create({
     color: '#1F58A2'
   },
 
+  reminderSeparator: {
+    height: 1,
+    backgroundColor: '#E4E4E4',
+    flex: 1,
+    marginLeft: 15,
+    padding: 10
+  },
+
+  reminderTextInput: {
+    fontFamily: 'Avenir',
+    backgroundColor: '#FFF',
+    height: 50,
+    padding: 10,
+    margin: 10,
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 8,
+    color: '#1F58A2'
+  },
+
   scrollviewContainer: {
     flexDirection: 'column',
     flexGrow: 1,
