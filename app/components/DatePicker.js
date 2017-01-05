@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { DatePickerIOS, StyleSheet, Text, TextInput, View } from 'react-native';
+import styles from '../styles/appStyle';
 
 export default class DatePicker extends Component {
   constructor(props){
@@ -31,15 +32,17 @@ export default class DatePicker extends Component {
   }
 
   render() {
+    console.log(this.props);
     console.log(this.state.date);
     return (
-      <View>
+      <View style={styles.scrollviewContainer}>
         <DatePickerIOS
           date={this.state.date}
           mode="datetime"
           timeZoneOffsetInMinutes={this.state.timeZoneOffsetInHours * 60}
           onDateChange={this.onDateChange.bind(this)}
           minuteInterval={10}
+          style={styles.datePicker}
         />
       </View>
     )

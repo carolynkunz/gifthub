@@ -68,12 +68,12 @@ export default class RecipientsDashboard extends Component {
     let recipientNames = this.state.recipientInfo.map((item, index) => {
       return (
         <View key={index}>
-          <View style={styles.profileRowContainer}>
+          <View>
             <TouchableHighlight
               onPress={() => this.handleSubmit(item.id) }
               underlayColor="white"
               >
-            <Text style={styles.profileRowContent}> {item.first_name + ' ' + item.last_name} </Text>
+            <Text> {item.first_name + ' ' + item.last_name} </Text>
             </TouchableHighlight>
             {/* <ActionButton
               buttonColor="rgba(231,76,60,1)"
@@ -86,7 +86,7 @@ export default class RecipientsDashboard extends Component {
     });
 
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollviewContainer}>
 
         {recipientNames}
 

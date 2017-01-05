@@ -1,19 +1,62 @@
 import React, { Component } from 'react';
-import { DatePickerIOS, Modal, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
+import { DatePickerIOS, Modal, ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
 import DatePicker from './DatePicker';
 import RNCalendarReminders from 'react-native-calendar-reminders';
+import Separator from '../helpers/Separator';
 import styles from '../styles/appStyle';
 
 export default class Reminders extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      startDate: new Date(Date.UTC(96, 11, 1, 0, 0, 0)),
-      dueDate: new Date(Date.UTC(96, 11, 1, 0, 0, 0)),
+      date: new Date(),
       reminderNotes: '',
       modalVisible: false
     }
+    console.log('reminders initial state: ', this.state);
   }
+
+  onDateChange(date) {
+    this.setState({date: date});
+    // this.props.events.emit('date-picked', date);
+  }
+
+
+  // fetchAllReminders() {
+  //   RNCalendarReminders.fetchAllReminders(reminders => {
+  //     var reminderId;
+  //     for (var i = 0; i < reminders.length; i++) {
+  //       if (reminders[i].title === "'GiftHub Reminder for: ' + this.props.passProps.firstName") {
+  //         reminderId = reminders[i].id;
+  //         break;
+  //       }
+  //     }
+  //
+  //     // Update the Reminder, or create a new one.
+  //     if (reminderId !== undefined) {
+  //       RNCalendarReminders.saveReminder('GiftHub Reminder for: ' + this.props.passProps.firstName, {
+  //         id: reminders[i].id,
+  //         location: '',
+  //         notes: '',
+  //         startDate: this.state.date,
+  //         alarms: [{
+  //           date: -1 // or absolute date
+  //         }],
+  //       });
+  //     } else {
+  //       RNCalendarReminders.saveReminder('GiftHub Reminder for: ' + this.props.passProps.firstName, {
+  //         location: '',
+  //         notes: '',
+  //         startDate: this.state.date,
+  //         alarms: [{
+  //           date: -1 // or absolute date
+  //         }],
+  //       });
+  //     }
+  //   });
+  //
+  //
+  // }
 
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
@@ -25,33 +68,36 @@ export default class Reminders extends Component {
         RNCalendarReminders.saveReminder('GiftHub Reminder for: ' + this.props.passProps.firstName, {
           location: '',
           notes: this.state.reminderNotes,
-          startDate: this.state.startDate,
-          dueDate: this.state.dueDate,
+          date: date,
           alarms: [{
             date: -1 // or absolute date
           }]
         });
+        console.log('date: ', this.state.date);
       })
       .catch((err) => {
         console.error(err);
       })
+
+    // this.fetchAllReminders();
 
     this.props.onRequestClose();
 
   }
 
   render() {
+    console.log(this.props);
     return (
-      <View style={{marginTop: 22}}>
+      <ScrollView contentContainerStyle={styles.scrollviewContainer}>
         <View>
-          <Text>Create Reminder</Text>
+          <Text style={styles.buttonText}>Create Reminder</Text>
 
           {/* <View>
             <TextInput
               placeholder="Date"
               style={styles.recipientTextInput}
-              onChangeText={(startDate) => this.setState({startDate})}
-              value={this.state.startDate}
+              onChangeText={(date) => this.setState({date})}
+              value={this.state.date}
             />
           </View> */}
           {/* <View>
@@ -64,19 +110,15 @@ export default class Reminders extends Component {
           </View> */}
 
           <View>
-            <Text>Start Date</Text>
+            <Text style={styles.buttonText}>Start Date</Text>
             <DatePicker
-              onDateChange={(startDate) => this.setState({startDate})}
+              onDateChange={this.onDateChange.bind(this)}
+
+              // onDateChange={(date) => this.setState({date})}
             />
           </View>
 
-          <View>
-            <Text>Due Date</Text>
-            <DatePicker
-              onDateChange={(dueDate) => this.setState({dueDate})}
-            />
-          </View>
-
+          <Separator />
 
           <View>
             <TextInput
@@ -94,11 +136,11 @@ export default class Reminders extends Component {
             this.setModalVisible(!this.state.modalVisible)
           }}>
 
-          <Text>Save Reminder</Text>
+          <Text style={styles.buttonText}>Save Reminder</Text>
         </TouchableHighlight>
 
       </View>
-    </View>
+    </ScrollView>
     )
   }
 };

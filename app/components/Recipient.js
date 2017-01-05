@@ -27,7 +27,12 @@ export default class Recipient extends Component {
 
   getRowTitle(recipient, item) {
     return item[0] ? item[0].toUpperCase() + item.slice(1) : item;
+
+    // return item[0] ? item[0].replace(/\ +/g, ' ') : item;
+
   }
+
+
 
   handleSubmit() {
     this.props.navigator.push({
@@ -58,7 +63,8 @@ export default class Recipient extends Component {
       }
     });
     return (
-        <ScrollView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollviewContainer}>
+        <ScrollView>
           {list}
           <TouchableHighlight
             style={styles.button}
@@ -90,10 +96,11 @@ export default class Recipient extends Component {
               onPress={() => {
               this.setModalVisible(true)
             }}>
-            <Text>Add Reminder</Text>
+            <Text style={styles.buttonText}>Add Reminder</Text>
 
           </TouchableHighlight>
         </ScrollView>
+      </ScrollView>
       )
     }
 };

@@ -40,20 +40,20 @@ export default class Main extends Component {
   render() {
     return (
       <View style={styles.mainContainer}>
-        <Text style={styles.title}>GiftHub</Text>
+        <Text style={styles.mainTitle}>GiftHub</Text>
         <TouchableHighlight
-          style={styles.button}
+          style={styles.mainButton}
           onPress={this.goToLogin.bind(this)}
           underlayColor="white"
           >
-          <Text style={styles.buttonText}> LOGIN </Text>
+          <Text style={styles.mainButtonText}> LOGIN </Text>
         </TouchableHighlight>
         <TouchableHighlight
-          style={styles.button}
+          style={styles.mainButton}
           onPress={this.goToSignup.bind(this)}
           underlayColor="white"
           >
-          <Text style={styles.buttonText}> SIGN UP </Text>
+          <Text style={styles.mainButtonText}> SIGN UP </Text>
         </TouchableHighlight>
       </View>
     )

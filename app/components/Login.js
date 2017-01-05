@@ -178,6 +178,7 @@ export default class Login extends Component {
             autoCapitalize="none"
             autoCorrect={false}
             placeholder="Username"
+            placeholderTextColor="rgba(231, 73, 148, .75)"
             style={styles.loginTextInput}
             onChangeText={(username) => this.setState({username})}
             value={this.state.username}
@@ -186,6 +187,7 @@ export default class Login extends Component {
         <View>
           <TextInput
             placeholder="Password"
+            placeholderTextColor="rgba(231, 73, 148, .75)"
             style={styles.loginTextInput}
             secureTextEntry={true}
             onChangeText={(password) => this.setState({password})}

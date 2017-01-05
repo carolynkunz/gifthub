@@ -17,7 +17,7 @@
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
                BuildableName = "gifthub.app"
                BlueprintName = "gifthub"
-               ReferencedContainer = "container:gifthub.xcodeproj">
+               ReferencedContainer = "container:GiftHub.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -31,7 +31,7 @@
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
                BuildableName = "gifthubTests.xctest"
                BlueprintName = "gifthubTests"
-               ReferencedContainer = "container:gifthub.xcodeproj">
+               ReferencedContainer = "container:GiftHub.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -49,7 +49,7 @@
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
                BuildableName = "gifthubTests.xctest"
                BlueprintName = "gifthubTests"
-               ReferencedContainer = "container:gifthub.xcodeproj">
+               ReferencedContainer = "container:GiftHub.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -59,7 +59,7 @@
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
             BuildableName = "gifthub.app"
             BlueprintName = "gifthub"
-            ReferencedContainer = "container:gifthub.xcodeproj">
+            ReferencedContainer = "container:GiftHub.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -82,7 +82,7 @@
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
             BuildableName = "gifthub.app"
             BlueprintName = "gifthub"
-            ReferencedContainer = "container:gifthub.xcodeproj">
+            ReferencedContainer = "container:GiftHub.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -101,7 +101,7 @@
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
             BuildableName = "gifthub.app"
             BlueprintName = "gifthub"
-            ReferencedContainer = "container:gifthub.xcodeproj">
+            ReferencedContainer = "container:GiftHub.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

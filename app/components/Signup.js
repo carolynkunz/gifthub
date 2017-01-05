@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { ActivityIndicator, AlertIOS, Image, InteractionManager, TouchableHighlight, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import styles from '../styles/appStyle';
 import api from '../utils/api';
-import Dashboard from './Dashboard';
+import Login from './Login';
+
+// import RecipientsDashboard from './RecipientsDashboard';
 
 export default class Signup extends Component {
   constructor(props) {
@@ -17,7 +19,6 @@ export default class Signup extends Component {
       isLoading: false,
       error: false
     }
-    console.log('this.state.isLoggedin: ', this.state.isLoggedin);
   }
 
   checkIsLoggedIn() {
@@ -45,6 +46,37 @@ export default class Signup extends Component {
         console.error(err);
       });
   }
+
+  // handleSubmitLogin() {
+  //   let userLogin = {username: this.state.username, password: this.state.password};
+  //   console.log('userLogin handleSubmitLogin: ', userLogin);
+  //   let url = 'https://carolynkunz-gifthub.herokuapp.com/api/token';
+  //   let headers = new Headers();
+  //   let myInit = {
+  //     method: "POST",
+  //     headers: {
+  //       'Accept' : 'application/json',
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(userLogin)
+  //   };
+  //
+  //   fetch(url, myInit)
+  //     .then((res) => {
+  //       if(res.ok) {
+  //         return res.json()
+  //       }
+  //       return res.text();
+  //     })
+  //     .then((resData) => {
+  //       console.log('handleSubmitLogin: ', resData);
+  //       return resData
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  //
+  // }
 
   handleSubmit() {
     let userSignup = {
@@ -74,8 +106,7 @@ export default class Signup extends Component {
         return res.text();
       })
       .then((resData) => {
-        console.log('userSignup: ', userSignup);
-        console.log('resData: ', resData);
+        console.log('userSignup resData: ', resData);
         if (resData === 'First Name must not be blank') {
           AlertIOS.alert(
             resData
@@ -114,11 +145,11 @@ export default class Signup extends Component {
 
         } else {
           this.setState({ isLoggedin: true });
-          console.log(this.state.isLoggedin);
+          // this.handleSubmitLogin();
 
           this.props.navigator.push({
-            title: this.state.username || "Dashboard",
-            component: Dashboard,
+            title: this.state.username || "Login",
+            component: Login,
             passProps: {
               userInfo: resData,
               isLoggedin: this.state.isLoggedin
@@ -146,15 +177,14 @@ export default class Signup extends Component {
   }
 
   render() {
-    console.log('this.state.isLoggedin: ', this.state.isLoggedin);
-
     return (
-      <View  style={styles.loginContainer}>
+      <View  style={styles.signupContainer}>
         <View>
           <TextInput
             autoCorrect={false}
             placeholder="First Name"
-            style={styles.loginTextInput}
+            placeholderTextColor="rgba(231, 73, 148, .75)"
+            style={styles.signupTextInput}
             onChangeText={(firstName) => this.setState({firstName})}
             value={this.state.firstName}
           />
@@ -163,7 +193,8 @@ export default class Signup extends Component {
           <TextInput
             autoCorrect={false}
             placeholder="Last Name"
-            style={styles.loginTextInput}
+            placeholderTextColor="rgba(231, 73, 148, .75)"
+            style={styles.signupTextInput}
             onChangeText={(lastName) => this.setState({lastName})}
             value={this.state.lastName}
           />
@@ -173,7 +204,8 @@ export default class Signup extends Component {
             autoCapitalize="none"
             autoCorrect={false}
             placeholder="Email"
-            style={styles.loginTextInput}
+            placeholderTextColor="rgba(231, 73, 148, .75)"
+            style={styles.signupTextInput}
             onChangeText={(email) => this.setState({email})}
             value={this.state.email}
           />
@@ -183,6 +215,7 @@ export default class Signup extends Component {
             autoCapitalize="none"
             autoCorrect={false}
             placeholder="User Name"
+            placeholderTextColor="rgba(231, 73, 148, .75)"
             style={styles.loginTextInput}
             onChangeText={(username) => this.setState({username})}
             value={this.state.username}
@@ -191,6 +224,7 @@ export default class Signup extends Component {
         <View>
           <TextInput
             placeholder="Password"
+            placeholderTextColor="rgba(231, 73, 148, .75)"
             style={styles.loginTextInput}
             secureTextEntry={true}
             onChangeText={(password) => this.setState({password})}
