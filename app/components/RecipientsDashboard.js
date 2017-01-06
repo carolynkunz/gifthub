@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Image, InteractionManager, Modal, ScrollView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { Image, InteractionManager, Modal, Navigator, ScrollView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import Recipient from './Recipient';
 import ActionButton from 'react-native-action-button';
+import Login from './Login';
+
 import NewRecipient from './NewRecipient';
 import Separator from '../helpers/Separator';
 import api from '../utils/api';
@@ -73,6 +75,36 @@ export default class RecipientsDashboard extends Component {
     });
   }
 
+  handleSubmitLogout() {
+      let headers = new Headers();
+      let myInit =
+        { method: 'DELETE',
+          headers: headers
+        };
+
+      headers.append("Accept", "application/json");
+
+      fetch('https://carolynkunz-gifthub.herokuapp.com/api/token', myInit)
+        .then((res) => {
+          this.props.checkIsLoggedIn();
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+
+
+    InteractionManager.runAfterInteractions(() => {
+      this.setState({
+        isLoggedin: false
+      })
+    });
+    this.props.navigator.push({
+      component: Login,
+      isLoggedin: false,
+      isLoading: true
+    });
+  }
+
 
   render() {
     // console.log('RecipientsDashboard Props: ', this.props);
@@ -110,6 +142,18 @@ export default class RecipientsDashboard extends Component {
             <Text style={styles.buttonText}> Create New Recipient </Text>
           </TouchableHighlight>
         </View>
+
+        <Navigator
+          renderScene={(route, navigator) =>
+            <TouchableHighlight
+              style={styles.button}
+              onPress={this.handleSubmitLogout.bind(this)}
+              underlayColor="white"
+              >
+                <Text style={styles.buttonText}> LOG OUT </Text>
+              </TouchableHighlight>
+          }
+        />
       </ScrollView>
     )
   }

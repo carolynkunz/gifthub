@@ -20,6 +20,10 @@ export default class Reminders extends Component {
     this.setState({date: date});
   }
 
+  onRequestClose(visible) {
+    this.setState({ modalVisible: false})
+  }
+
 
   fetchAllReminders() {
     RNCalendarReminders.fetchAllReminders()
@@ -80,9 +84,6 @@ export default class Reminders extends Component {
       .catch((err) => {
         console.error(err);
       })
-
-    this.props.onRequestClose();
-
   }
 
   render() {
@@ -120,6 +121,18 @@ export default class Reminders extends Component {
             }}>
 
               <Text style={styles.buttonText}>Save Reminder</Text>
+            </TouchableHighlight>
+          </View>
+
+          <View style={styles.reminderButtonView}>
+            <TouchableHighlight
+              style={styles.button}
+              underlayColor="white"
+              onPress={() => {
+              this.onRequestClose(!this.state.modalVisible)
+            }}>
+
+              <Text style={styles.buttonText}>Cancel</Text>
             </TouchableHighlight>
           </View>
 
