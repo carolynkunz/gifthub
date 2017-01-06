@@ -120,6 +120,13 @@
 			remoteGlobalIDString = 2D2A28131D9B038B00D4039D;
 			remoteInfo = "React-tvOS";
 		};
+		031C6CA71E1F714D004EC10C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 031C6C8F1E1F714D004EC10C /* RNVectorIcons.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
+			remoteInfo = RNVectorIcons;
+		};
 		03AC50D61E1C73F100431B03 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 03AC50BF1E1C73F100431B03 /* RNCalendarReminders.xcodeproj */;
@@ -188,6 +195,7 @@
 		00E356EE1AD99517003FC87E /* gifthubTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gifthubTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* gifthubTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = gifthubTests.m; sourceTree = "<group>"; };
+		031C6C8F1E1F714D004EC10C /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		0337A19F1E1C7120005A7E97 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		03AC50BF1E1C73F100431B03 /* RNCalendarReminders.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCalendarReminders.xcodeproj; path = "../node_modules/react-native-calendar-reminders/RNCalendarReminders.xcodeproj"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
@@ -296,6 +304,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		031C6C901E1F714D004EC10C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				031C6CA81E1F714D004EC10C /* libRNVectorIcons.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		0337A19E1E1C7120005A7E97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -374,6 +390,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				031C6C8F1E1F714D004EC10C /* RNVectorIcons.xcodeproj */,
 				03AC50BF1E1C73F100431B03 /* RNCalendarReminders.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -535,6 +552,10 @@
 					ProductGroup = 03AC50C01E1C73F100431B03 /* Products */;
 					ProjectRef = 03AC50BF1E1C73F100431B03 /* RNCalendarReminders.xcodeproj */;
 				},
+				{
+					ProductGroup = 031C6C901E1F714D004EC10C /* Products */;
+					ProjectRef = 031C6C8F1E1F714D004EC10C /* RNVectorIcons.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -627,6 +648,13 @@
 			fileType = archive.ar;
 			path = "libReact-tvOS.a";
 			remoteRef = 031936481E0CB0D200C2F562 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		031C6CA81E1F714D004EC10C /* libRNVectorIcons.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNVectorIcons.a;
+			remoteRef = 031C6CA71E1F714D004EC10C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		03AC50D71E1C73F100431B03 /* libRNCalendarReminders.a */ = {

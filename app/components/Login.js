@@ -10,8 +10,10 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'cdelkunz',
-      password: 'password',
+      // username: 'cdelkunz',
+      // password: 'password',
+      username: '',
+      password: '',
       user_id: '',
       recipientIds: '',
       token: '',
@@ -166,6 +168,9 @@ export default class Login extends Component {
 
     return (
       <View  style={styles.loginContainer}>
+
+        <Text style={styles.loginTitle}>Login</Text>
+
         <View>
           <TextInput
             autoCapitalize="none"
@@ -187,7 +192,7 @@ export default class Login extends Component {
             value={this.state.password}
           />
           <TouchableHighlight
-            style={styles.button}
+            style={styles.loginButton}
             onPress={this.handleSubmit.bind(this)}
             underlayColor="white"
             >

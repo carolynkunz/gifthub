@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, InteractionManager, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
+import { ActivityIndicator, Image, InteractionManager, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
 import styles from '../styles/appStyle';
 import api from '../utils/api';
 import Login from './Login';
@@ -39,23 +39,28 @@ export default class Main extends Component {
 
   render() {
     return (
-      <View style={styles.mainContainer}>
-        <Text style={styles.mainTitle}>GiftHub</Text>
-        <TouchableHighlight
-          style={styles.mainButton}
-          onPress={this.goToLogin.bind(this)}
-          underlayColor="white"
-          >
-          <Text style={styles.mainButtonText}> LOGIN </Text>
-        </TouchableHighlight>
-        <TouchableHighlight
-          style={styles.mainButton}
-          onPress={this.goToSignup.bind(this)}
-          underlayColor="white"
-          >
-          <Text style={styles.mainButtonText}> SIGN UP </Text>
-        </TouchableHighlight>
-      </View>
+      // <Image source={require('../images/confetti.png')} style={styles.mainContainer}>
+      <Image source={require('../images/bunting.jpg')} style={styles.mainContainer}>
+
+          <Text style={styles.mainTitle}>GiftHub</Text>
+
+          <TouchableHighlight
+            style={styles.signupButton}
+            onPress={this.goToSignup.bind(this)}
+            underlayColor="white"
+            >
+            <Text style={styles.mainButtonText}> SIGN UP </Text>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            style={styles.loginButton}
+            onPress={this.goToLogin.bind(this)}
+            underlayColor="white"
+            >
+            <Text style={styles.mainButtonText}> LOGIN </Text>
+          </TouchableHighlight>
+
+      </Image>
     )
   }
 };

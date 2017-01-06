@@ -62,28 +62,7 @@ const styles = StyleSheet.create({
     height: 350,
   },
 
-  loginContainer: {
-    flex: 1,
-    // marginBottom: 20,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    backgroundColor: '#1F58A2'
-  },
-
-  loginTextInput: {
-    fontFamily: 'Avenir',
-    backgroundColor: '#FFF',
-    height: 50,
-    padding: 4,
-    margin: 10,
-    fontSize: 23,
-    borderWidth: 1,
-    borderColor: 'white',
-    borderRadius: 8,
-    color: '#1F58A2'
-  },
-
-  mainButton: {
+  loginButton: {
     height: 45,
     flexDirection: 'row',
     backgroundColor: '#FFF',
@@ -95,10 +74,68 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
 
+  loginContainer: {
+    flex: 1,
+    // marginBottom: 20,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    // backgroundColor: 'rgba(0, 0, 0, 0)',
+    backgroundColor: '#1F58A2',
+  },
+
+  loginTitle: {
+    fontFamily: 'Avenir-Medium',
+    marginBottom: 80,
+    fontSize: 42,
+    textAlign: 'center',
+    color: '#E74994',
+  },
+
+  loginTextInput: {
+    fontFamily: 'Avenir',
+    backgroundColor: '#FFF',
+    height: 50,
+    padding: 4,
+    margin: 10,
+    fontSize: 23,
+    borderWidth: 1,
+    borderColor: '#FFF',
+    borderRadius: 8,
+    color: '#1F58A2'
+  },
+
+  loginButton: {
+    height: 45,
+    flexDirection: 'row',
+    backgroundColor: '#FFF',
+    borderColor: '#FFF',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 40,
+    margin: 10,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    width: 120
+  },
+
+  signupButton: {
+    height: 45,
+    flexDirection: 'row',
+    backgroundColor: '#FFF',
+    borderColor: '#FFF',
+    borderWidth: 1,
+    borderRadius: 8,
+    // marginBottom: 40,
+    margin: 10,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    width: 120
+  },
+
   mainButtonText: {
     fontFamily: 'Avenir-Medium',
     fontSize: 16,
-    color: '#1F58A2',
+    color: '#E74994',
     alignSelf: 'center',
     margin: 5,
     padding: 5
@@ -110,15 +147,18 @@ const styles = StyleSheet.create({
     marginTop: 65,
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundColor: '#1F58A2'
+    backgroundColor: 'rgba(0, 0, 0, 0)',
+    // backgroundColor: '#1F58A2',
+    width: null,
+    height: null,
   },
 
   mainTitle: {
-    fontFamily: 'Avenir',
-    marginBottom: 20,
-    fontSize: 38,
+    fontFamily: 'Avenir-Medium',
+    marginBottom: 80,
+    fontSize: 42,
     textAlign: 'center',
-    color: '#FFF'
+    color: '#E74994',
   },
 
   profileContainer: {
