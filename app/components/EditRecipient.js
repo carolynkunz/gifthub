@@ -19,6 +19,7 @@ export default class EditRecipient extends Component {
       note: this.props.note,
       userId: this.props.userId,
       userInfo: this.props.userInfo,
+      height: 0,
       isLoggedin: true,
       isLoading: false,
       error: false
@@ -174,9 +175,11 @@ export default class EditRecipient extends Component {
         <View>
           <TextInput
             placeholder="Notes"
-            style={styles.recipientNotesTextInput}
+            style={[styles.recipientNotesTextInput, {height: Math.max(35, this.state.height)}]}
             multiline={true}
-            // onContentSizeChange={ nativeEvent: { contentSize: { width, height } } }
+            onContentSizeChange={(event) =>
+              this.setState({ height: event.nativeEvent.contentSize.height })
+            }
             onChangeText={(note) => this.setState({note})}
             value={this.state.note}
           />

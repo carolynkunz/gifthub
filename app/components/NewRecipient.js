@@ -16,6 +16,7 @@ export default class NewRecipient extends Component {
       addressZip: '',
       birthday: '',
       note: '',
+      height: 0,
       userInfo: this.props,
       // isLoggedin: false,
       isLoading: false,
@@ -162,12 +163,15 @@ export default class NewRecipient extends Component {
           <TextInput
             placeholder="Notes"
             placeholderTextColor="rgba(231, 73, 148, .75)"
-            style={styles.recipientNotesTextInput}
+            style={[styles.recipientNotesTextInput, {height: Math.max(35, this.state.height)}]}
             multiline={true}
-            // onContentSizeChange={ nativeEvent: { contentSize: { width, height } } }
+            onContentSizeChange={(event) =>
+              this.setState({ height: event.nativeEvent.contentSize.height })
+            }
             onChangeText={(note) => this.setState({note})}
             value={this.state.note}
           />
+
           <TouchableHighlight
             style={styles.button}
             onPress={this.handleSubmit.bind(this)}

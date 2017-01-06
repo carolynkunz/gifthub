@@ -209,7 +209,6 @@ const styles = StyleSheet.create({
   recipientNotesTextInput: {
     fontFamily: 'Avenir',
     backgroundColor: '#FFF',
-    height: 60,
     padding: 4,
     margin: 10,
     fontSize: 18,
