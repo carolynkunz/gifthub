@@ -36,16 +36,6 @@ export default class Recipient extends Component {
     );
   }
 
-  handleSubmitRecipientsDashboard() {
-    this.props.navigator.push({
-      title: "Recipients Dashboard",
-      component: RecipientsDashboard,
-      passProps: this.props.userInfo
-    })
-  }
-
-
-
   handleSubmit() {
     this.props.navigator.push({
       title: "Edit Recipient",
@@ -92,14 +82,12 @@ export default class Recipient extends Component {
               animationType={"slide"}
               transparent={false}
               visible={this.state.modalVisible}
-              // onRequestClose={this.reminderAlert()}
             >
 
               <Reminders
                 passProps={this.props.userInfo}
                 onRequestClose={() => {
                   this.setState({modalVisible: false}, () => {
-                    // this.reminderAlert()
                   })
                 }}
               />
@@ -116,17 +104,6 @@ export default class Recipient extends Component {
 
           </TouchableHighlight>
 
-          <Separator />
-
-          <TouchableHighlight
-            style={styles.button}
-            underlayColor="white"
-            onPress={() => {
-            this.handleSubmitRecipientsDashboard()
-          }}>
-          <Text style={styles.buttonText}>Recipients Dashboard</Text>
-
-        </TouchableHighlight>
         </ScrollView>
       </ScrollView>
       )

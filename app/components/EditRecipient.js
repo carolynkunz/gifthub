@@ -19,7 +19,7 @@ export default class EditRecipient extends Component {
       note: this.props.note,
       userId: this.props.userId,
       userInfo: this.props.userInfo,
-      // isLoggedin: false,
+      isLoggedin: true,
       isLoading: false,
       error: false
     }
@@ -63,7 +63,7 @@ export default class EditRecipient extends Component {
         this.setState({ userInfo: resData });
 
         this.props.navigator.push({
-          title: this.state.username || "Recipient",
+          title: "Recipient",
           component: Recipient,
           passProps: {
             userInfo: resData,
@@ -90,10 +90,6 @@ export default class EditRecipient extends Component {
         error: false
       })
     })
-    // 
-    // AlertIOS.alert(
-    //   'Profile has been updated.'
-    // )
   }
 
   render() {

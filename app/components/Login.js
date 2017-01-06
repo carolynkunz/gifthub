@@ -87,7 +87,7 @@ export default class Login extends Component {
           })
 
           this.props.navigator.push({
-            title: this.state.username || "Recipients Dashboard",
+            title: "Recipients Dashboard",
             component: RecipientsDashboard,
             passProps: {
               checkIsLoggedIn: this.checkIsLoggedIn,

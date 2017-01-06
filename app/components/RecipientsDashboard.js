@@ -20,6 +20,8 @@ export default class RecipientsDashboard extends Component {
       isLoading: false,
       error: false
     }
+
+    console.log(this.state);
   }
 
   handleSubmit(id) {
@@ -35,7 +37,7 @@ export default class RecipientsDashboard extends Component {
             userInfo: res
           })
           this.props.navigator.push({
-            title: res.first_name || "Recipient Profile",
+            title: "Recipient Profile",
             component: Recipient,
             passProps: {userInfo: this.state.userInfo},
             isLoading: true,
@@ -53,13 +55,19 @@ export default class RecipientsDashboard extends Component {
     });
   }
 
+  handleRecipientAdded(newRecipient) {
+    console.log(this.state.recipientInfo.concat(newRecipient));
+    this.setState({recipientInfo: this.state.recipientInfo.concat(newRecipient)})
+  }
+
   handleSubmitNewRecipient() {
     this.props.navigator.push({
       title: "New Recipient",
       component: NewRecipient,
       passProps: {
         userInfo: this.props.userInfo,
-        token: this.props.token
+        token: this.props.token,
+        onRecipientAdded: this.handleRecipientAdded.bind(this)
       },
       isLoading: true
     });
@@ -76,7 +84,7 @@ export default class RecipientsDashboard extends Component {
               onPress={() => this.handleSubmit(item.id) }
               underlayColor="white"
               >
-            <Text style={styles.profileRowTitle}> {item.first_name + ' ' + item.last_name} </Text>
+            <Text style={styles.profileRowTitle}> {item.firstName + ' ' + item.lastName} </Text>
             </TouchableHighlight>
             {/* <ActionButton
               buttonColor="rgba(231,76,60,1)"

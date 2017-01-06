@@ -33,8 +33,8 @@ export default class NewRecipient extends Component {
       addressCity: this.state.addressCity || undefined,
       addressState: this.state.addressState || undefined,
       addressZip: this.state.addressZip || undefined,
-      birthday: this.state.birthday,
-      note: this.state.note
+      birthday: this.state.birthday || undefined,
+      note: this.state.note|| undefined
     };
 
     console.log('newRecipient: ', newRecipient);
@@ -60,18 +60,10 @@ export default class NewRecipient extends Component {
       })
       .then((resData) => {
         this.setState({ userInfo: resData });
-        console.log('this.state.userInfo: ',this.state.userInfo);
 
-        this.props.navigator.push({
-          title: this.state.firstName || " Recipient",
-          component: Recipient,
-          passProps: {
-            userInfo: resData,
-            isLoggedin: this.state.isLoggedin,
-            token: this.props.token
-            // userRecipients: this.state.newRecipient
-          }
-        })
+        this.props.onRecipientAdded(resData);
+
+        this.props.navigator.pop();
       })
       .catch((err) => {
         console.error(err);
@@ -79,7 +71,6 @@ export default class NewRecipient extends Component {
   }
 
   render() {
-    // console.log('NewRecipient Props: ', this.props);
     return (
       <View  style={styles.recipientContainer}>
         <View>
