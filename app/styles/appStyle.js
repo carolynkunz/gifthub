@@ -181,8 +181,21 @@ const styles = StyleSheet.create({
 
   profileRowContent: {
     fontFamily: 'Avenir',
-    fontSize: 14,
-    paddingBottom: 5
+    fontSize: 16,
+    paddingBottom: 5,
+  },
+
+  recipientButton: {
+    height: 45,
+    width: 275,
+    flexDirection: 'row',
+    backgroundColor: '#FFF',
+    borderColor: '#8CD5B7',
+    borderWidth: 1,
+    borderRadius: 8,
+    margin: 10,
+    alignSelf: 'center',
+    justifyContent: 'center'
   },
 
   recipientContainer: {
@@ -214,7 +227,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     borderBottomWidth: 1,
     borderBottomColor: '#8CD5B7',
-    // borderRadius: 8,
+    borderRadius: 8,
     color: '#1F58A2'
   },
 
@@ -301,9 +314,9 @@ const styles = StyleSheet.create({
 
   separator: {
     height: 1,
-    backgroundColor: '#FFAD87',
+    backgroundColor: '#E74994',
     flex: 1,
-    marginLeft: 15
+    // marginLeft: 15
   },
 
   signupContainer: {
@@ -313,6 +326,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#1F58A2'
   },
+
+  signupTitle: {
+    fontFamily: 'Avenir-Medium',
+    marginBottom: 40,
+    fontSize: 28,
+    textAlign: 'center',
+    color: '#E74994',
+  },
+
 
   signupTextInput: {
     fontFamily: 'Avenir',

@@ -40,7 +40,7 @@ export default class Main extends Component {
   render() {
     return (
       // <Image source={require('../images/confetti.png')} style={styles.mainContainer}>
-      <Image source={require('../images/bunting.jpg')} style={styles.mainContainer}>
+       <Image source={require('../images/bunting.jpg')} style={styles.mainContainer}>
 
           <Text style={styles.mainTitle}>GiftHub</Text>
 

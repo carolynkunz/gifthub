@@ -162,23 +162,25 @@ export default class Signup extends Component {
       });
 
       this.checkIsLoggedIn();
-
-
-    InteractionManager.runAfterInteractions(() => {
-      this.setState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        username: '',
-        password: '',
-        isLoggedin: false
-      })
-    })
+    //
+    //
+    // InteractionManager.runAfterInteractions(() => {
+    //   this.setState({
+    //     firstName: '',
+    //     lastName: '',
+    //     email: '',
+    //     username: '',
+    //     password: '',
+    //     isLoggedin: false
+    //   })
+    // })
   }
 
   render() {
     return (
       <View  style={styles.signupContainer}>
+        <Text style={styles.signupTitle}>Create GiftHub Account</Text>
+
         <View>
           <TextInput
             autoCorrect={false}

@@ -60,6 +60,8 @@ export default class NewRecipient extends Component {
         return res.text();
       })
       .then((resData) => {
+        console.log('NewRecipient resData: ', resData);
+
         this.setState({ userInfo: resData });
 
         this.props.onRecipientAdded(resData);
@@ -72,6 +74,7 @@ export default class NewRecipient extends Component {
   }
 
   render() {
+    // console.log('NewRecipient props: ', this.props);
     return (
       <View  style={styles.recipientContainer}>
         <View>
@@ -173,7 +176,7 @@ export default class NewRecipient extends Component {
           />
 
           <TouchableHighlight
-            style={styles.button}
+            style={styles.recipientButton}
             onPress={this.handleSubmit.bind(this)}
             underlayColor="white"
             >

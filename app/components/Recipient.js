@@ -36,6 +36,30 @@ export default class Recipient extends Component {
     );
   }
 
+  handleSubmitDeleteRecipient() {
+    let url = `https://carolynkunz-gifthub.herokuapp.com/recipients/${this.props.userInfo.id}`;
+    let headers = new Headers();
+    let myInit = {
+      method: "DELETE",
+      headers: {
+        'Accept' : 'application/json',
+        'Content-Type': 'application/json',
+        // 'Authorization': `Bearer ${this.props.token}`
+      }
+      // body: JSON.stringify(this.props.user)
+    };
+
+    fetch(url, myInit)
+    .then((res) => {
+      console.log(res);
+      // this.props.checkIsLoggedIn();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+
+  }
+
   handleSubmit() {
     this.props.navigator.push({
       title: "Edit Recipient",
@@ -71,7 +95,7 @@ export default class Recipient extends Component {
         <ScrollView>
           {list}
           <TouchableHighlight
-            style={styles.button}
+            style={styles.recipientButton}
             onPress={this.handleSubmit.bind(this)}
             underlayColor="white"
             >
@@ -95,7 +119,7 @@ export default class Recipient extends Component {
             </Modal>
 
             <TouchableHighlight
-              style={styles.button}
+              style={styles.recipientButton}
               underlayColor="white"
               onPress={() => {
               this.setModalVisible(true)
@@ -103,6 +127,14 @@ export default class Recipient extends Component {
             <Text style={styles.buttonText}>Add Reminder</Text>
 
           </TouchableHighlight>
+
+          <TouchableHighlight
+            style={styles.recipientButton}
+            onPress={this.handleSubmitDeleteRecipient.bind(this)}
+            underlayColor="white"
+            >
+              <Text style={styles.buttonText}> Delete Recipient </Text>
+            </TouchableHighlight>
 
         </ScrollView>
       </ScrollView>

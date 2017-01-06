@@ -184,7 +184,7 @@ export default class EditRecipient extends Component {
             value={this.state.note}
           />
           <TouchableHighlight
-            style={styles.button}
+            style={styles.recipientButton}
             onPress={this.handleSubmit.bind(this)}
             underlayColor="white"
             >

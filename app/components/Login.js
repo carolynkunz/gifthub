@@ -10,10 +10,10 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'cdelkunz',
-      password: 'password',
-      // username: '',
-      // password: '',
+      // username: 'cdelkunz',
+      // password: 'password',
+      username: '',
+      password: '',
       user_id: '',
       recipientIds: '',
       token: '',

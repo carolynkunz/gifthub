@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Image, InteractionManager, Modal, Navigator, ScrollView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import Recipient from './Recipient';
 import ActionButton from 'react-native-action-button';
-import Login from './Login';
+import Main from './Main';
 
 import NewRecipient from './NewRecipient';
 import Separator from '../helpers/Separator';
@@ -41,7 +41,11 @@ export default class RecipientsDashboard extends Component {
           this.props.navigator.push({
             title: "Recipient Profile",
             component: Recipient,
-            passProps: {userInfo: this.state.userInfo},
+            passProps: {
+              userInfo: this.state.userInfo,
+              onRecipientAdded: this.handleRecipientAdded.bind(this),
+              token: this.props.token,
+            },
             isLoading: true,
             isLoggedin: this.state.isLoggedin
 
@@ -71,6 +75,7 @@ export default class RecipientsDashboard extends Component {
         token: this.props.token,
         onRecipientAdded: this.handleRecipientAdded.bind(this)
       },
+      // onRecipientAdded: this.handleRecipientAdded.bind(this),
       isLoading: true
     });
   }
@@ -99,7 +104,7 @@ export default class RecipientsDashboard extends Component {
       })
     });
     this.props.navigator.push({
-      component: Login,
+      component: Main,
       isLoggedin: false,
       isLoading: true
     });
@@ -118,10 +123,6 @@ export default class RecipientsDashboard extends Component {
               >
             <Text style={styles.profileRowTitle}> {item.firstName + ' ' + item.lastName} </Text>
             </TouchableHighlight>
-            {/* <ActionButton
-              buttonColor="rgba(231,76,60,1)"
-              onPress={this.handleSubmit.bind(this)}
-            /> */}
           </View>
           <Separator />
         </View>
@@ -133,9 +134,9 @@ export default class RecipientsDashboard extends Component {
 
         {recipientNames}
 
-        <View>
+        <View style={{marginTop: 80}}>
           <TouchableHighlight
-            style={styles.button}
+            style={styles.recipientButton}
             onPress={this.handleSubmitNewRecipient.bind(this)}
             underlayColor="white"
             >
@@ -143,17 +144,15 @@ export default class RecipientsDashboard extends Component {
           </TouchableHighlight>
         </View>
 
-        <Navigator
-          renderScene={(route, navigator) =>
-            <TouchableHighlight
-              style={styles.button}
-              onPress={this.handleSubmitLogout.bind(this)}
-              underlayColor="white"
-              >
-                <Text style={styles.buttonText}> LOG OUT </Text>
-              </TouchableHighlight>
-          }
-        />
+        <View>
+          <TouchableHighlight
+            style={styles.recipientButton}
+            onPress={this.handleSubmitLogout.bind(this)}
+            underlayColor="white"
+          >
+            <Text style={styles.buttonText}> LOG OUT </Text>
+          </TouchableHighlight>
+        </View>
       </ScrollView>
     )
   }

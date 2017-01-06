@@ -20,9 +20,9 @@ export default class Reminders extends Component {
     this.setState({date: date});
   }
 
-  onRequestClose(visible) {
-    this.setState({ modalVisible: false})
-  }
+  // onRequestClose() {
+  //   this.setState({modalVisible: false});
+  // }
 
 
   fetchAllReminders() {
@@ -84,6 +84,8 @@ export default class Reminders extends Component {
       .catch((err) => {
         console.error(err);
       })
+
+      this.props.onRequestClose();
   }
 
   render() {
@@ -128,10 +130,11 @@ export default class Reminders extends Component {
             <TouchableHighlight
               style={styles.button}
               underlayColor="white"
-              onPress={() => {
-              this.onRequestClose(!this.state.modalVisible)
-            }}>
-
+              onRequestClose={() => {
+                this.setState({modalVisible: false}, () => {
+                })
+              }}
+>
               <Text style={styles.buttonText}>Cancel</Text>
             </TouchableHighlight>
           </View>
