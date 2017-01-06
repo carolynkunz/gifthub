@@ -11,7 +11,8 @@
     "react-native": "0.39.2",
     "react-native-action-button": "^2.0.18",
     "react-native-calendar-reminders": "^1.0.0",
-    "react-native-datepicker": "^1.4.3"
+    "react-native-datepicker": "^1.4.3",
+    "react-native-vector-icons": "^3.0.0"
   },
   "devDependencies": {
     "babel-jest": "18.0.0",

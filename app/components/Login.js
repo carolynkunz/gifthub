@@ -10,8 +10,8 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      username: 'cdelkunz',
+      password: 'password',
       user_id: '',
       recipientIds: '',
       token: '',
@@ -75,16 +75,15 @@ export default class Login extends Component {
             resData
           )
         } else {
-          this.setState({
-            userRecipients: resData,
-          })
 
-          let mapRecipientIds = this.state.userRecipients.map((item, index) => {
+          const userRecipients = resData;
+          const recipientIds = resData.map((item, index) => {
             return item.id;
-          })
+          });
 
           this.setState({
-            recipientIds: mapRecipientIds,
+            userRecipients,
+            recipientIds
           })
 
           this.props.navigator.push({
@@ -94,10 +93,10 @@ export default class Login extends Component {
               checkIsLoggedIn: this.checkIsLoggedIn,
               isLoading: true,
               isLoggedin: this.state.isLoggedin,
-              recipientIds: this.state.recipientIds,
+              recipientIds: recipientIds,
               token: this.state.token,
               userInfo: this.state.userInfo,
-              userRecipients: this.state.userRecipients
+              userRecipients: userRecipients
             }
           })
         }
@@ -105,14 +104,6 @@ export default class Login extends Component {
       .catch((err) => {
         console.error(err);
       });
-
-      // InteractionManager.runAfterInteractions(() => {
-      //   this.setState({
-      //     username: '',
-      //     password: '',
-      //     isLoggedin: false
-      //   })
-      // })
   }
 
 
@@ -137,7 +128,7 @@ export default class Login extends Component {
         return res.text();
       })
       .then((resData) => {
-        console.log('resData: ', resData);
+        // console.log('resData: ', resData);
         if (resData === 'Username must not be blank') {
           AlertIOS.alert(
             resData
@@ -171,6 +162,8 @@ export default class Login extends Component {
   }
 
   render() {
+    // console.log('Login Props: ', this.props);
+
     return (
       <View  style={styles.loginContainer}>
         <View>

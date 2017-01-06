@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Image, Modal, ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
+import { AlertIOS, Image, Modal, ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
 import styles from '../styles/appStyle';
-import Dashboard from './Dashboard';
+import RecipientsDashboard from './RecipientsDashboard';
 import EditRecipient from './EditRecipient';
 import Reminders from './Reminders';
 import RNCalendarReminders from 'react-native-calendar-reminders';
@@ -23,13 +23,25 @@ export default class Recipient extends Component {
 
   setModalVisible(visible) {
    this.setState({modalVisible: visible});
+
   }
 
   getRowTitle(recipient, item) {
-    return item[0] ? item[0].toUpperCase() + item.slice(1) : item;
+    return item.charAt(0).toUpperCase() + item.slice(1).split(/(?=[A-Z])/).join(" ");
+  }
 
-    // return item[0] ? item[0].replace(/\ +/g, ' ') : item;
+  reminderAlert() {
+    AlertIOS.alert(
+      'Your reminder has been created.'
+    );
+  }
 
+  handleSubmitRecipientsDashboard() {
+    this.props.navigator.push({
+      title: "Recipients Dashboard",
+      component: RecipientsDashboard,
+      passProps: this.props.userInfo
+    })
   }
 
 
@@ -43,6 +55,8 @@ export default class Recipient extends Component {
   }
 
   render() {
+    console.log(this.props);
+
     let userInfo = this.props.userInfo;
     let topicArr = ['firstName', 'lastName', 'addressLineOne', 'addressLineTwo',
      'addressCity', 'addressState', 'addressZip', 'birthday', 'note'];
@@ -78,14 +92,16 @@ export default class Recipient extends Component {
               animationType={"slide"}
               transparent={false}
               visible={this.state.modalVisible}
-              onRequestClose={() => {alert("Modal has been closed.")}}
+              // onRequestClose={this.reminderAlert()}
             >
 
               <Reminders
                 passProps={this.props.userInfo}
-                onRequestClose={() => {this.setState({
-                  modalVisible: false
-                })}}
+                onRequestClose={() => {
+                  this.setState({modalVisible: false}, () => {
+                    // this.reminderAlert()
+                  })
+                }}
               />
 
             </Modal>
@@ -99,6 +115,18 @@ export default class Recipient extends Component {
             <Text style={styles.buttonText}>Add Reminder</Text>
 
           </TouchableHighlight>
+
+          <Separator />
+
+          <TouchableHighlight
+            style={styles.button}
+            underlayColor="white"
+            onPress={() => {
+            this.handleSubmitRecipientsDashboard()
+          }}>
+          <Text style={styles.buttonText}>Recipients Dashboard</Text>
+
+        </TouchableHighlight>
         </ScrollView>
       </ScrollView>
       )

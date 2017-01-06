@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DatePickerIOS, Modal, ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
+import { AlertIOS, DatePickerIOS, Modal, ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
 import DatePicker from './DatePicker';
 import RNCalendarReminders from 'react-native-calendar-reminders';
 import Separator from '../helpers/Separator';
@@ -11,52 +11,49 @@ export default class Reminders extends Component {
     this.state = {
       date: new Date(),
       reminderNotes: '',
+      reminderId: '',
       modalVisible: false
     }
-    console.log('reminders initial state: ', this.state);
   }
 
   onDateChange(date) {
     this.setState({date: date});
-    // this.props.events.emit('date-picked', date);
   }
 
 
-  // fetchAllReminders() {
-  //   RNCalendarReminders.fetchAllReminders(reminders => {
-  //     var reminderId;
-  //     for (var i = 0; i < reminders.length; i++) {
-  //       if (reminders[i].title === "'GiftHub Reminder for: ' + this.props.passProps.firstName") {
-  //         reminderId = reminders[i].id;
-  //         break;
-  //       }
-  //     }
-  //
-  //     // Update the Reminder, or create a new one.
-  //     if (reminderId !== undefined) {
-  //       RNCalendarReminders.saveReminder('GiftHub Reminder for: ' + this.props.passProps.firstName, {
-  //         id: reminders[i].id,
-  //         location: '',
-  //         notes: '',
-  //         startDate: this.state.date,
-  //         alarms: [{
-  //           date: -1 // or absolute date
-  //         }],
-  //       });
-  //     } else {
-  //       RNCalendarReminders.saveReminder('GiftHub Reminder for: ' + this.props.passProps.firstName, {
-  //         location: '',
-  //         notes: '',
-  //         startDate: this.state.date,
-  //         alarms: [{
-  //           date: -1 // or absolute date
-  //         }],
-  //       });
-  //     }
-  //   });
-  //
-  //
-  // }
+  fetchAllReminders() {
+    RNCalendarReminders.fetchAllReminders()
+      .then((reminders) => {
+        console.log(reminders);
+        let reminderId;
+        for (var i = 0; i < reminders.length; i++) {
+          if (reminders[i].title === 'GiftHub Reminder for ' + this.props.passProps.firstName + ' ' + this.props.passProps.lastName) {
+            reminderId = reminders[i].id;
+            break;
+          }
+        }
+        console.log('reminderId: ', reminderId);
+
+        // Update the Reminder, or create a new one.
+        if (reminderId !== undefined) {
+          console.log('Reminder would be removed');
+          // RNCalendarReminders.removeReminder('GiftHub Reminder for ' + this.props.passProps.firstName + ' ' + this.props.passProps.lastName, {
+          //   // id: reminders[i].id,
+          //   id: this.state.reminderId,
+          //   location: '',
+          //   notes: this.state.reminderNotes,
+          //   dueDate: this.state.date,
+          //   alarms: [{
+          //     date: -1 // or absolute date
+          //   }],
+          // });
+          // console.log('!==undefined: ', this.state.reminderId);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+  }
 
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
@@ -65,83 +62,66 @@ export default class Reminders extends Component {
       .then((status) => {
         console.log('authorizing EventStore...');
 
-        RNCalendarReminders.saveReminder('GiftHub Reminder for: ' + this.props.passProps.firstName, {
+        RNCalendarReminders.saveReminder('GiftHub Reminder for ' + this.props.passProps.firstName + ' ' + this.props.passProps.lastName, {
           location: '',
           notes: this.state.reminderNotes,
-          date: this.state.date,
+          dueDate: this.state.date.toISOString(),
           alarms: [{
             date: -1 // or absolute date
           }]
+        })
+        .then((id) => {
+          console.log(`Saved ID: ${id}`);
+
+          // this.setState({reminderId: id});
+          // this.fetchAllReminders();
         });
-        console.log('date: ', this.state.date);
       })
       .catch((err) => {
         console.error(err);
       })
-
-    // this.fetchAllReminders();
 
     this.props.onRequestClose();
 
   }
 
   render() {
-    console.log(this.props);
     return (
       <ScrollView contentContainerStyle={styles.scrollviewContainer}>
         <View>
-          <Text style={styles.buttonText}>Create a Gift Reminder</Text>
+          <Text style={styles.reminderNotesTitle}>Create a Gift Reminder for {this.props.passProps.firstName}</Text>
 
-          <Separator />
 
-          <View>
-            <Text style={styles.buttonText}>Start Date</Text>
-            <DatePicker
-              onDateChange={this.onDateChange.bind(this)}
-
-              // onDateChange={(date) => this.setState({date})}
-            />
-          </View>
-
-          <Separator />
-
-          {/* <View>
+          <View style={styles.reminderNotes}>
             <TextInput
-              placeholder="Date"
-              style={styles.recipientTextInput}
-              onChangeText={(date) => this.setState({date})}
-              value={this.state.date}
-            />
-          </View> */}
-          {/* <View>
-            <TextInput
-              placeholder="Due Date"
-              style={styles.recipientTextInput}
-              onChangeText={(dueDate) => this.setState({dueDate})}
-              value={this.state.dueDate}
-            />
-          </View> */}
-
-          <View>
-            <TextInput
-              placeholder="Reminder notes for your gifting plans"
-              style={styles.recipientTextInput}
+              placeholder="Note"
+              placeholderTextColor="rgba(231, 73, 148, .75)"
+              style={styles.reminderTextInput}
               onChangeText={(reminderNotes) => this.setState({reminderNotes})}
               value={this.state.reminderNotes}
             />
           </View>
 
-          <Separator />
 
-          <TouchableHighlight
-            style={styles.button}
-            underlayColor="white"
-            onPress={() => {
-            this.setModalVisible(!this.state.modalVisible)
-          }}>
+          <View style={styles.datePickerView}>
+            <DatePicker
+              onDateChange={this.onDateChange.bind(this)}
+              date={this.state.date}
+            />
+          </View>
 
-          <Text style={styles.buttonText}>Save Reminder</Text>
-        </TouchableHighlight>
+
+          <View style={styles.reminderButtonView}>
+            <TouchableHighlight
+              style={styles.button}
+              underlayColor="white"
+              onPress={() => {
+              this.setModalVisible(!this.state.modalVisible)
+            }}>
+
+              <Text style={styles.buttonText}>Save Reminder</Text>
+            </TouchableHighlight>
+          </View>
 
       </View>
     </ScrollView>

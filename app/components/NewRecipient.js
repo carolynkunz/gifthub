@@ -26,7 +26,6 @@ export default class NewRecipient extends Component {
 
   handleSubmit() {
     let newRecipient = {
-      userId: this.state.userInfo.id,
       firstName: this.state.firstName,
       lastName: this.state.lastName || undefined,
       addressLineOne: this.state.addressLineOne || undefined,
@@ -46,7 +45,8 @@ export default class NewRecipient extends Component {
       method: "POST",
       headers: {
         'Accept' : 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.props.token}`
       },
       body: JSON.stringify(newRecipient)
     };
@@ -60,45 +60,33 @@ export default class NewRecipient extends Component {
       })
       .then((resData) => {
         this.setState({ userInfo: resData });
+        console.log('this.state.userInfo: ',this.state.userInfo);
 
         this.props.navigator.push({
-          title: this.state.username || " Recipient",
+          title: this.state.firstName || " Recipient",
           component: Recipient,
           passProps: {
             userInfo: resData,
-            isLoggedin: this.state.isLoggedin
+            isLoggedin: this.state.isLoggedin,
+            token: this.props.token
+            // userRecipients: this.state.newRecipient
           }
         })
       })
       .catch((err) => {
         console.error(err);
       });
-    InteractionManager.runAfterInteractions(() => {
-      this.setState({
-        firstName: '',
-        lastName: '',
-        addressLineOne: '',
-        addressLineTwo: '',
-        addressCity: '',
-        addressState: '',
-        addressZip: '',
-        birthday: '',
-        note: '',
-        // isLoggedin: false,
-        isLoading: false,
-        error: false
-      })
-    })
   }
 
   render() {
-    console.log(this.props);
+    // console.log('NewRecipient Props: ', this.props);
     return (
-      <View  style={styles.loginContainer}>
+      <View  style={styles.recipientContainer}>
         <View>
           <TextInput
             autoCorrect={false}
             placeholder="First Name"
+            placeholderTextColor="rgba(231, 73, 148, .75)"
             style={styles.recipientTextInput}
             returnKeyType="next"
             onChangeText={(firstName) => this.setState({firstName})}
@@ -109,6 +97,7 @@ export default class NewRecipient extends Component {
           <TextInput
             autoCorrect={false}
             placeholder="Last Name"
+            placeholderTextColor="rgba(231, 73, 148, .75)"
             style={styles.recipientTextInput}
             returnKeyType="next"
             onChangeText={(lastName) => this.setState({lastName})}
@@ -119,6 +108,7 @@ export default class NewRecipient extends Component {
           <TextInput
             autoCorrect={false}
             placeholder="Address Line One"
+            placeholderTextColor="rgba(231, 73, 148, .75)"
             style={styles.recipientTextInput}
             returnKeyType="next"
             onChangeText={(addressLineOne) => this.setState({addressLineOne})}
@@ -129,6 +119,7 @@ export default class NewRecipient extends Component {
           <TextInput
             autoCorrect={false}
             placeholder="Address Line Two"
+            placeholderTextColor="rgba(231, 73, 148, .75)"
             style={styles.recipientTextInput}
             returnKeyType="next"
             onChangeText={(addressLineTwo) => this.setState({addressLineTwo})}
@@ -138,6 +129,7 @@ export default class NewRecipient extends Component {
         <View>
           <TextInput
             placeholder="City"
+            placeholderTextColor="rgba(231, 73, 148, .75)"
             style={styles.recipientTextInput}
             returnKeyType="next"
             onChangeText={(addressCity) => this.setState({addressCity})}
@@ -147,6 +139,7 @@ export default class NewRecipient extends Component {
         <View>
           <TextInput
             placeholder="State"
+            placeholderTextColor="rgba(231, 73, 148, .75)"
             style={styles.recipientTextInput}
             returnKeyType="next"
             onChangeText={(addressState) => this.setState({addressState})}
@@ -156,7 +149,9 @@ export default class NewRecipient extends Component {
         <View>
           <TextInput
             placeholder="Zipcode"
+            placeholderTextColor="rgba(231, 73, 148, .75)"
             style={styles.recipientTextInput}
+            returnKeyType="next"
             onChangeText={(addressZip) => this.setState({addressZip})}
             value={this.state.addressZip}
           />
@@ -164,6 +159,7 @@ export default class NewRecipient extends Component {
         <View>
           <TextInput
             placeholder="Birthday"
+            placeholderTextColor="rgba(231, 73, 148, .75)"
             style={styles.recipientTextInput}
             returnKeyType="next"
             keyboardType="numeric"
@@ -174,7 +170,8 @@ export default class NewRecipient extends Component {
         <View>
           <TextInput
             placeholder="Notes"
-            style={styles.recipientTextInput}
+            placeholderTextColor="rgba(231, 73, 148, .75)"
+            style={styles.recipientNotesTextInput}
             multiline={true}
             // onContentSizeChange={ nativeEvent: { contentSize: { width, height } } }
             onChangeText={(note) => this.setState({note})}

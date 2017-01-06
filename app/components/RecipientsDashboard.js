@@ -31,7 +31,6 @@ export default class RecipientsDashboard extends Component {
             isLoading: false
           })
         } else {
-          // console.log(res);
           this.setState({
             userInfo: res
           })
@@ -58,22 +57,26 @@ export default class RecipientsDashboard extends Component {
     this.props.navigator.push({
       title: "New Recipient",
       component: NewRecipient,
-      passProps: this.props.userInfo,
+      passProps: {
+        userInfo: this.props.userInfo,
+        token: this.props.token
+      },
       isLoading: true
     });
   }
 
 
   render() {
+    // console.log('RecipientsDashboard Props: ', this.props);
     let recipientNames = this.state.recipientInfo.map((item, index) => {
       return (
         <View key={index}>
-          <View>
+          <View style={styles.profileRowContainer}>
             <TouchableHighlight
               onPress={() => this.handleSubmit(item.id) }
               underlayColor="white"
               >
-            <Text> {item.first_name + ' ' + item.last_name} </Text>
+            <Text style={styles.profileRowTitle}> {item.first_name + ' ' + item.last_name} </Text>
             </TouchableHighlight>
             {/* <ActionButton
               buttonColor="rgba(231,76,60,1)"

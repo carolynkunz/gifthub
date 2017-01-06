@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InteractionManager, Modal, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
+import { AlertIOS, InteractionManager, Modal, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
 import Recipient from './Recipient';
 import styles from '../styles/appStyle';
 
@@ -54,14 +54,12 @@ export default class EditRecipient extends Component {
 
     fetch(url, myInit)
       .then((res) => {
-        console.log(res);
         if(res.ok) {
           return res.json()
         }
         return res.text();
       })
       .then((resData) => {
-        console.log(resData);
         this.setState({ userInfo: resData });
 
         this.props.navigator.push({
@@ -92,16 +90,19 @@ export default class EditRecipient extends Component {
         error: false
       })
     })
+    // 
+    // AlertIOS.alert(
+    //   'Profile has been updated.'
+    // )
   }
 
   render() {
-    console.log(this.props);
     return (
-      <View  style={styles.loginContainer}>
+      <View  style={styles.recipientContainer}>
         <View>
           <TextInput
             autoCorrect={false}
-            // placeholder="First Name"
+            placeholder="First Name"
             style={styles.recipientTextInput}
             returnKeyType="next"
             onChangeText={(firstName) => this.setState({firstName})}
@@ -111,7 +112,7 @@ export default class EditRecipient extends Component {
         <View>
           <TextInput
             autoCorrect={false}
-            // placeholder="Last Name"
+            placeholder="Last Name"
             style={styles.recipientTextInput}
             returnKeyType="next"
             onChangeText={(lastName) => this.setState({lastName})}
@@ -121,7 +122,7 @@ export default class EditRecipient extends Component {
         <View>
           <TextInput
             autoCorrect={false}
-            // placeholder="Address Line One"
+            placeholder="Address Line One"
             style={styles.recipientTextInput}
             returnKeyType="next"
             onChangeText={(addressLineOne) => this.setState({addressLineOne})}
@@ -131,7 +132,7 @@ export default class EditRecipient extends Component {
         <View>
           <TextInput
             autoCorrect={false}
-            // placeholder="Address Line Two"
+            placeholder="Address Line Two"
             style={styles.recipientTextInput}
             returnKeyType="next"
             onChangeText={(addressLineTwo) => this.setState({addressLineTwo})}
@@ -140,7 +141,7 @@ export default class EditRecipient extends Component {
         </View>
         <View>
           <TextInput
-            // placeholder="City"
+            placeholder="City"
             style={styles.recipientTextInput}
             returnKeyType="next"
             onChangeText={(addressCity) => this.setState({addressCity})}
@@ -149,7 +150,7 @@ export default class EditRecipient extends Component {
         </View>
         <View>
           <TextInput
-            // placeholder="State"
+            placeholder="State"
             style={styles.recipientTextInput}
             returnKeyType="next"
             onChangeText={(addressState) => this.setState({addressState})}
@@ -158,7 +159,7 @@ export default class EditRecipient extends Component {
         </View>
         <View>
           <TextInput
-            // placeholder="Zipcode"
+            placeholder="Zipcode"
             style={styles.recipientTextInput}
             onChangeText={(addressZip) => this.setState({addressZip})}
             value={this.state.addressZip}
@@ -166,7 +167,7 @@ export default class EditRecipient extends Component {
         </View>
         <View>
           <TextInput
-            // placeholder="Birthday"
+            placeholder="Birthday"
             style={styles.recipientTextInput}
             returnKeyType="next"
             keyboardType="numeric"
@@ -176,8 +177,8 @@ export default class EditRecipient extends Component {
         </View>
         <View>
           <TextInput
-            // placeholder="Notes"
-            style={styles.recipientTextInput}
+            placeholder="Notes"
+            style={styles.recipientNotesTextInput}
             multiline={true}
             // onContentSizeChange={ nativeEvent: { contentSize: { width, height } } }
             onChangeText={(note) => this.setState({note})}

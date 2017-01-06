@@ -12,37 +12,16 @@ export default class DatePicker extends Component {
     }
   }
 
-  // getDefaultProps() {
-  //   return {
-  //     date: new Date(),
-  //     timeZoneOffsetInHours: (-1) * (new Date()).getTimezoneOffset() / 60,
-  //   };
-  // }
-
-  // getInitialState() {
-  //   return {
-  //     date: this.props.date,
-  //     timeZoneOffsetInHours: this.props.timeZoneOffsetInHours,
-  //   };
-  // }
-
-  onDateChange(date) {
-    this.setState({date: date});
-    // this.props.events.emit('date-picked', date);
-  }
-
   render() {
-    console.log(this.props);
-    console.log(this.state.date);
     return (
-      <View style={styles.scrollviewContainer}>
+      <View>
         <DatePickerIOS
-          date={this.state.date}
+          date={this.props.date}
           mode="datetime"
           timeZoneOffsetInMinutes={this.state.timeZoneOffsetInHours * 60}
-          onDateChange={this.onDateChange.bind(this)}
+          onDateChange={this.props.onDateChange.bind(this)}
           minuteInterval={10}
-          style={styles.datePicker}
+          // style={styles.datePicker}
         />
       </View>
     )

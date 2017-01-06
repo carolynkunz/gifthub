@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 
   buttonText: {
     fontFamily: 'Avenir-Medium',
-    fontSize: 16,
+    fontSize: 18,
     color: '#1F58A2',
     alignSelf: 'center',
     margin: 5,
@@ -39,14 +39,23 @@ const styles = StyleSheet.create({
 
   datePicker: {
     borderTopWidth: 1,
-    // position: 'absolute',
+    position: 'absolute',
     bottom: 0,
     right: 0,
     left: 0,
-    height: 30,
+    height: 20,
     padding: 10,
     borderColor: '#CCC',
     backgroundColor: '#FFF',
+  },
+
+  datePickerView: {
+    flex: 1,
+    marginTop: 20,
+    paddingTop: 10,
+    borderWidth: 1,
+    borderColor: '#FFAD87',
+    borderRadius: 8,
   },
 
   image: {
@@ -136,6 +145,14 @@ const styles = StyleSheet.create({
     paddingBottom: 5
   },
 
+  recipientContainer: {
+    flex: 1,
+    // marginBottom: 20,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    backgroundColor: '#FFF'
+  },
+
   recipientTextInput: {
     fontFamily: 'Avenir',
     backgroundColor: '#FFF',
@@ -143,18 +160,73 @@ const styles = StyleSheet.create({
     padding: 4,
     margin: 10,
     fontSize: 18,
+    borderBottomWidth: 1,
+    borderBottomColor: '#8CD5B7',
+    // borderRadius: 8,
+    color: '#1F58A2'
+  },
+
+  recipientNotesTextInput: {
+    fontFamily: 'Avenir',
+    backgroundColor: '#FFF',
+    height: 60,
+    padding: 4,
+    margin: 10,
+    fontSize: 18,
+    borderBottomWidth: 1,
+    borderBottomColor: '#8CD5B7',
+    // borderRadius: 8,
+    color: '#1F58A2'
+  },
+
+  reminderNotes: {
+    flex: 1,
+    // marginTop: 20,
+    // paddingTop: 5,
+    // paddingLeft: 5,
     borderWidth: 1,
-    borderColor: 'white',
+    borderColor: '#E74994',
+    borderRadius: 8,
+  },
+
+  reminderNotesTitle: {
+    color: '#1F58A2',
+    fontFamily: 'Avenir',
+    fontSize: 16,
+    marginBottom: 15,
+    marginTop: 15,
+    paddingTop: 15,
+    textAlign: 'center',
+  },
+
+  reminderTextInput: {
+    fontFamily: 'Avenir',
+    backgroundColor: '#FFF',
+    height: 60,
+    padding: 4,
+    margin: 10,
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: '#8CD5B7',
     borderRadius: 8,
     color: '#1F58A2'
   },
 
-  reminderSeparator: {
-    height: 1,
-    backgroundColor: '#E4E4E4',
+  reminderView: {
     flex: 1,
-    marginLeft: 15,
-    padding: 10
+    marginTop: 20,
+    paddingTop: 50,
+    borderWidth: 1,
+    borderColor: '#EF8FCC',
+    borderRadius: 8,
+  },
+
+  reminderButtonView: {
+    flex: 1,
+    marginTop: 20,
+    borderWidth: 1,
+    borderColor: '#EF8FCC',
+    borderRadius: 8,
   },
 
   reminderTextInput: {
@@ -190,7 +262,7 @@ const styles = StyleSheet.create({
 
   separator: {
     height: 1,
-    backgroundColor: '#E4E4E4',
+    backgroundColor: '#FFAD87',
     flex: 1,
     marginLeft: 15
   },
