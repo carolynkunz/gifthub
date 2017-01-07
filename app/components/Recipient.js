@@ -9,6 +9,14 @@ import Separator from '../helpers/Separator';
 
 import DatePicker from './DatePicker';
 
+import ActionButton from 'react-native-action-button';
+import Icon from 'react-native-vector-icons/Ionicons';
+
+
+//Touchable Opacity - wrap icon w/touchable opacity, set style to flex:1
+    //put onPress()
+// <Icon name="ios-log-out" size={20} color="#000" />
+
 
 export default class Recipient extends Component {
   constructor(props) {
@@ -99,7 +107,9 @@ export default class Recipient extends Component {
             onPress={this.handleSubmit.bind(this)}
             underlayColor="white"
             >
-              <Text style={styles.buttonText}> Edit Recipient </Text>
+              <Text style={styles.buttonText}> Edit Recipient
+                <Icon name="edit" size={20} color="#000" />
+              </Text>
             </TouchableHighlight>
 
             <Modal
@@ -133,7 +143,9 @@ export default class Recipient extends Component {
             onPress={this.handleSubmitDeleteRecipient.bind(this)}
             underlayColor="white"
             >
-              <Text style={styles.buttonText}> Delete Recipient </Text>
+              <Text style={styles.buttonText}> Delete Recipient
+              <Icon name="ios-close-circle-outline" size={20} color="#000" />
+              </Text>
             </TouchableHighlight>
 
         </ScrollView>

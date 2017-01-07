@@ -62,7 +62,7 @@ export default class RecipientsDashboard extends Component {
   }
 
   handleRecipientAdded(newRecipient) {
-    console.log(this.state.recipientInfo.concat(newRecipient));
+    // console.log(this.state.recipientInfo.concat(newRecipient));
     this.setState({recipientInfo: this.state.recipientInfo.concat(newRecipient)})
   }
 
