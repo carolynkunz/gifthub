@@ -7,11 +7,13 @@
     "test": "jest"
   },
   "dependencies": {
+    "lodash": "^4.17.4",
     "react": "15.4.1",
     "react-native": "0.39.2",
     "react-native-action-button": "^2.0.18",
     "react-native-calendar-reminders": "^1.0.0",
     "react-native-datepicker": "^1.4.3",
+    "react-native-navbar": "^1.6.0",
     "react-native-vector-icons": "^3.0.0"
   },
   "devDependencies": {

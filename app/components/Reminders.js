@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AlertIOS, DatePickerIOS, Modal, ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
+import { AlertIOS, Button, DatePickerIOS, Modal, ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
 import DatePicker from './DatePicker';
 import RNCalendarReminders from 'react-native-calendar-reminders';
 import Separator from '../helpers/Separator';
@@ -14,15 +14,13 @@ export default class Reminders extends Component {
       reminderId: '',
       modalVisible: false
     }
+    console.log('Reminders this.state: ',this.state);
   }
 
   onDateChange(date) {
     this.setState({date: date});
   }
 
-  // onRequestClose() {
-  //   this.setState({modalVisible: false});
-  // }
 
 
   fetchAllReminders() {
@@ -89,6 +87,7 @@ export default class Reminders extends Component {
   }
 
   render() {
+    console.log('Reminders props: ', this.props);
     return (
       <ScrollView contentContainerStyle={styles.scrollviewContainer}>
         <View>
@@ -98,7 +97,7 @@ export default class Reminders extends Component {
           <View style={styles.reminderNotes}>
             <TextInput
               placeholder="Note"
-              placeholderTextColor="rgba(231, 73, 148, .75)"
+              placeholderTextColor="rgba(31, 88, 162, .75)"
               style={styles.reminderTextInput}
               onChangeText={(reminderNotes) => this.setState({reminderNotes})}
               value={this.state.reminderNotes}
@@ -114,28 +113,27 @@ export default class Reminders extends Component {
           </View>
 
 
-          <View style={styles.reminderButtonView}>
+          <View>
             <TouchableHighlight
-              style={styles.button}
+              style={styles.reminderButton}
               underlayColor="white"
               onPress={() => {
               this.setModalVisible(!this.state.modalVisible)
             }}>
 
-              <Text style={styles.buttonText}>Save Reminder</Text>
+              <Text style={styles.reminderButtonText}>Save Reminder</Text>
             </TouchableHighlight>
           </View>
 
-          <View style={styles.reminderButtonView}>
+          <View>
             <TouchableHighlight
-              style={styles.button}
+              style={styles.reminderButton}
               underlayColor="white"
-              onRequestClose={() => {
-                this.setState({modalVisible: false}, () => {
-                })
-              }}
->
-              <Text style={styles.buttonText}>Cancel</Text>
+              onPress={() => {
+              this.props.onRequestClose()
+            }}
+            >
+              <Text style={styles.reminderButtonText}>Cancel</Text>
             </TouchableHighlight>
           </View>
 

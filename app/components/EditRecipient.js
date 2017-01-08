@@ -30,7 +30,7 @@ export default class EditRecipient extends Component {
 
   handleSubmit() {
     let editRecipient = {
-      userId: this.props.userId,
+      userId: this.props.userId || ' ',
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       addressLineOne: this.state.addressLineOne,
@@ -38,8 +38,8 @@ export default class EditRecipient extends Component {
       addressCity: this.state.addressCity,
       addressState: this.state.addressState,
       addressZip: this.state.addressZip,
-      birthday: this.state.birthday,
-      note: this.state.note
+      birthday: this.state.birthday || ' ',
+      note: this.state.note || undefined
     };
 
     let url = `https://carolynkunz-gifthub.herokuapp.com/recipients/${this.state.id}`;
@@ -61,6 +61,7 @@ export default class EditRecipient extends Component {
         return res.text();
       })
       .then((resData) => {
+
         this.setState({ userInfo: resData });
 
         this.props.navigator.push({
@@ -75,22 +76,22 @@ export default class EditRecipient extends Component {
       .catch((err) => {
         console.error(err);
       });
-    InteractionManager.runAfterInteractions(() => {
-      this.setState({
-        firstName: '',
-        lastName: '',
-        addressLineOne: '',
-        addressLineTwo: '',
-        addressCity: '',
-        addressState: '',
-        addressZip: '',
-        birthday: '',
-        note: '',
-        // isLoggedin: false,
-        isLoading: false,
-        error: false
-      })
-    })
+    // InteractionManager.runAfterInteractions(() => {
+    //   this.setState({
+    //     firstName: '',
+    //     lastName: '',
+    //     addressLineOne: '',
+    //     addressLineTwo: '',
+    //     addressCity: '',
+    //     addressState: '',
+    //     addressZip: '',
+    //     birthday: '',
+    //     note: '',
+    //     // isLoggedin: false,
+    //     isLoading: false,
+    //     error: false
+    //   })
+    // })
   }
 
   render() {

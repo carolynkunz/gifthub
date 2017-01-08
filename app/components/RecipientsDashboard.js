@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Image, InteractionManager, Modal, Navigator, ScrollView, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
 import api from '../utils/api';
-import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Login from './Login';
+
 import Main from './Main';
 import NewRecipient from './NewRecipient';
+import NavigationBar from 'react-native-navbar';
 import Recipient from './Recipient';
 import Separator from '../helpers/Separator';
 import styles from '../styles/recipientsDashboardStyle';
@@ -38,7 +40,7 @@ export default class RecipientsDashboard extends Component {
             userInfo: res
           })
           this.props.navigator.push({
-            title: "Recipient Profile",
+            title:this.state.userInfo.firstName + " " + this.state.userInfo.lastName,
             component: Recipient,
             passProps: {
               userInfo: this.state.userInfo,
@@ -67,7 +69,7 @@ export default class RecipientsDashboard extends Component {
 
   handleSubmitNewRecipient() {
     this.props.navigator.push({
-      title: "New Recipient",
+      // title: "New Recipient",
       component: NewRecipient,
       passProps: {
         userInfo: this.props.userInfo,
@@ -102,16 +104,14 @@ export default class RecipientsDashboard extends Component {
         isLoggedin: false
       })
     });
-    this.props.navigator.push({
-      component: Main,
-      isLoggedin: false,
-      isLoading: true
-    });
+
+    this.props.navigator.pop();
   }
 
 
   render() {
     // console.log('RecipientsDashboard Props: ', this.props);
+
     let recipientNames = this.state.recipientInfo.map((item, index) => {
       return (
         <View key={index}>
@@ -119,11 +119,13 @@ export default class RecipientsDashboard extends Component {
             <TouchableHighlight
               onPress={() => this.handleSubmit(item.id) }
               underlayColor="white"
-              >
-            <Text style={styles.profileRowTitle}> {item.firstName + ' ' + item.lastName} </Text>
+            >
+              <Text style={styles.profileRowTitle}> {item.firstName + ' ' + item.lastName} </Text>
             </TouchableHighlight>
           </View>
+
           <Separator />
+
         </View>
       )
     });
@@ -149,8 +151,8 @@ export default class RecipientsDashboard extends Component {
             onPress={this.handleSubmitNewRecipient.bind(this)}
           >
             <Text style={styles.addRecipientButtonText}> New Recipient</Text>
+            <Separator />
           </Icon.Button>
-          <Separator />
         </View> */}
 
         <View style={{marginTop: 40}}>

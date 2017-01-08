@@ -89,7 +89,7 @@ export default class Login extends Component {
           })
 
           this.props.navigator.push({
-            title: "Recipients Dashboard",
+            title: "Recipients",
             component: RecipientsDashboard,
             passProps: {
               checkIsLoggedIn: this.checkIsLoggedIn,
@@ -152,6 +152,7 @@ export default class Login extends Component {
             user_id: resData.id,
             userInfo: resData,
             token: resData.token,
+            isLoading: true
           });
           this.getUserRecipients(this.state.token);
         }

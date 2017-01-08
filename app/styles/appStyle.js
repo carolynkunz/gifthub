@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     paddingTop: 10,
     borderWidth: 1,
-    borderColor: '#FFAD87',
+    borderColor: '#E74994',
     borderRadius: 8,
   },
 
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
     margin: 10,
     fontSize: 18,
     borderWidth: 1,
-    borderColor: '#8CD5B7',
+    borderColor: '#E74994',
     borderRadius: 8,
     color: '#1F58A2'
   },
@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
   recipientNotesTextInput: {
     backgroundColor: '#FFF',
     borderWidth: 1,
-    borderColor: '#8CD5B7',
+    borderColor: '#E74994',
     borderRadius: 8,
     color: '#1F58A2',
     fontFamily: 'Avenir',
@@ -243,13 +243,13 @@ const styles = StyleSheet.create({
   },
 
   reminderNotesTitle: {
+    fontFamily: 'Avenir-Medium',
+    fontSize: 18,
     color: '#1F58A2',
-    fontFamily: 'Avenir',
-    fontSize: 16,
-    marginBottom: 15,
-    marginTop: 15,
+    alignSelf: 'center',
+    margin: 5,
     paddingTop: 15,
-    textAlign: 'center',
+    padding: 10
   },
 
   reminderTextInput: {
@@ -265,21 +265,26 @@ const styles = StyleSheet.create({
     color: '#1F58A2'
   },
 
-  reminderView: {
-    flex: 1,
-    marginTop: 20,
-    paddingTop: 50,
-    borderWidth: 1,
-    borderColor: '#EF8FCC',
-    borderRadius: 8,
+  reminderButtonText: {
+    fontFamily: 'Avenir-Medium',
+    fontSize: 18,
+    color: '#1F58A2',
+    alignSelf: 'center',
+    margin: 5,
+    padding: 5
   },
 
-  reminderButtonView: {
-    flex: 1,
-    marginTop: 20,
+  reminderButton: {
+    height: 45,
+    width: 275,
+    flexDirection: 'row',
+    backgroundColor: '#FFF',
+    borderColor: '#8CD5B7',
     borderWidth: 1,
-    borderColor: '#EF8FCC',
     borderRadius: 8,
+    margin: 10,
+    alignSelf: 'center',
+    justifyContent: 'center'
   },
 
   reminderTextInput: {

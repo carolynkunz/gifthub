@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { InteractionManager, StyleSheet, Text, TextInput, TouchableHighlight, ScrollView, View } from 'react-native';
 import Recipient from './Recipient';
-import styles from '../styles/appStyle';
+import styles from '../styles/newRecipientStyle';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default class NewRecipient extends Component {
@@ -159,30 +159,30 @@ export default class NewRecipient extends Component {
             placeholderTextColor="rgba(231, 73, 148, .75)"
             style={styles.recipientTextInput}
             returnKeyType="next"
-            keyboardType="numeric"
             onChangeText={(birthday) => this.setState({birthday})}
             value={this.state.birthday}
           />
         </View>
-        <View>
+        <ScrollView>
           <TextInput
-            placeholder="Keep notes on gift ideas, interests, and clothing sizes."
+            placeholder="Gift ideas, interests, clothing sizes..."
             placeholderTextColor="rgba(231, 73, 148, .75)"
             style={[styles.recipientNotesTextInput, {height: Math.max(35, this.state.height)}]}
             multiline={true}
-            onContentSizeChange={(event) =>
-              this.setState({ height: event.nativeEvent.contentSize.height })
-            }
+            // onContentSizeChange={(event) =>
+            //   this.setState({ height: event.nativeEvent.contentSize.height })
+            // }
             onChangeText={(note) => this.setState({note})}
             value={this.state.note}
           />
-
+        </ScrollView>
+          <View>
           <TouchableHighlight
             style={styles.recipientButton}
             onPress={this.handleSubmit.bind(this)}
             underlayColor="white"
             >
-            <Text style={styles.buttonText}> SAVE RECIPIENT </Text>
+            <Text style={styles.buttonText} > SAVE RECIPIENT </Text>
           </TouchableHighlight>
         </View>
       </ScrollView>
