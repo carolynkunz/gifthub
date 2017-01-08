@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { InteractionManager, StyleSheet, Text, TextInput, TouchableHighlight, ScrollView, View } from 'react-native';
 import Recipient from './Recipient';
 import styles from '../styles/appStyle';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default class NewRecipient extends Component {
   constructor(props) {

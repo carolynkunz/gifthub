@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { Image, InteractionManager, Modal, Navigator, ScrollView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
-import Recipient from './Recipient';
-import ActionButton from 'react-native-action-button';
-import Main from './Main';
-
-import NewRecipient from './NewRecipient';
-import Separator from '../helpers/Separator';
+import { Image, InteractionManager, Modal, Navigator, ScrollView, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
 import api from '../utils/api';
-
-import styles from '../styles/appStyle';
+import ActionButton from 'react-native-action-button';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Main from './Main';
+import NewRecipient from './NewRecipient';
+import Recipient from './Recipient';
+import Separator from '../helpers/Separator';
+import styles from '../styles/recipientsDashboardStyle';
 
 
 export default class RecipientsDashboard extends Component {
@@ -132,17 +131,35 @@ export default class RecipientsDashboard extends Component {
     return (
       <ScrollView contentContainerStyle={styles.scrollviewContainer}>
 
-        <Text></Text>
+        <View>
+          <Text style={styles.buttonText}>Recipients</Text>
+          <View style={styles.titleSeparator} />
+        </View>
+
 
         {recipientNames}
 
-        <View style={{marginTop: 80}}>
+        {/* <View>
+          <Icon.Button
+            name="ios-add-circle-outline"
+            iconStyle={styles.icon}
+            size={30}
+            backgroundColor="#FFF"
+            color="#1F58A2"
+            onPress={this.handleSubmitNewRecipient.bind(this)}
+          >
+            <Text style={styles.addRecipientButtonText}> New Recipient</Text>
+          </Icon.Button>
+          <Separator />
+        </View> */}
+
+        <View style={{marginTop: 40}}>
           <TouchableHighlight
             style={styles.recipientButton}
             onPress={this.handleSubmitNewRecipient.bind(this)}
             underlayColor="white"
-            >
-            <Text style={styles.buttonText}> Create New Recipient </Text>
+          >
+            <Text style={styles.buttonText}> Add New Recipient </Text>
           </TouchableHighlight>
         </View>
 
