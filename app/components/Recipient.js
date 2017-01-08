@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AlertIOS, Image, Modal, ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
+import { AlertIOS, Image, Modal, ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, TouchableOpacity, View } from 'react-native';
 import styles from '../styles/appStyle';
 import RecipientsDashboard from './RecipientsDashboard';
 import EditRecipient from './EditRecipient';
@@ -10,7 +10,7 @@ import Separator from '../helpers/Separator';
 import DatePicker from './DatePicker';
 
 import ActionButton from 'react-native-action-button';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
 //Touchable Opacity - wrap icon w/touchable opacity, set style to flex:1
@@ -107,8 +107,8 @@ export default class Recipient extends Component {
             onPress={this.handleSubmit.bind(this)}
             underlayColor="white"
             >
-              <Text style={styles.buttonText}> Edit Recipient
-                <Icon name="edit" size={20} color="#000" />
+              <Text style={styles.buttonText}> Edit
+                <Icon name="edit" size={20} color="#1F58A2" />
               </Text>
             </TouchableHighlight>
 
@@ -134,19 +134,21 @@ export default class Recipient extends Component {
               onPress={() => {
               this.setModalVisible(true)
             }}>
-            <Text style={styles.buttonText}>Add Reminder</Text>
+            <Text style={styles.buttonText}>Reminder
+              <Icon name="playlist-add" size={20} color="#1F58A2" />
+            </Text>
 
           </TouchableHighlight>
 
-          <TouchableHighlight
+          <TouchableOpacity
             style={styles.recipientButton}
             onPress={this.handleSubmitDeleteRecipient.bind(this)}
             underlayColor="white"
             >
-              <Text style={styles.buttonText}> Delete Recipient
-              <Icon name="ios-close-circle-outline" size={20} color="#000" />
+              <Text style={styles.buttonText}> Delete
+                <Icon name="close" size={20} color="#1F58A2" />
               </Text>
-            </TouchableHighlight>
+            </TouchableOpacity>
 
         </ScrollView>
       </ScrollView>

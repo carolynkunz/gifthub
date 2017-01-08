@@ -213,22 +213,23 @@ const styles = StyleSheet.create({
     padding: 4,
     margin: 10,
     fontSize: 18,
-    borderBottomWidth: 1,
-    borderBottomColor: '#8CD5B7',
-    // borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#8CD5B7',
+    borderRadius: 8,
     color: '#1F58A2'
   },
 
   recipientNotesTextInput: {
-    fontFamily: 'Avenir',
     backgroundColor: '#FFF',
-    padding: 4,
-    margin: 10,
-    fontSize: 18,
-    borderBottomWidth: 1,
-    borderBottomColor: '#8CD5B7',
+    borderWidth: 1,
+    borderColor: '#8CD5B7',
     borderRadius: 8,
-    color: '#1F58A2'
+    color: '#1F58A2',
+    fontFamily: 'Avenir',
+    fontSize: 18,
+    height: 100,
+    margin: 10,
+    padding: 4
   },
 
   reminderNotes: {

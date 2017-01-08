@@ -132,6 +132,8 @@ export default class RecipientsDashboard extends Component {
     return (
       <ScrollView contentContainerStyle={styles.scrollviewContainer}>
 
+        <Text></Text>
+
         {recipientNames}
 
         <View style={{marginTop: 80}}>

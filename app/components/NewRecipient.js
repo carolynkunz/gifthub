@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InteractionManager, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
+import { InteractionManager, StyleSheet, Text, TextInput, TouchableHighlight, ScrollView, View } from 'react-native';
 import Recipient from './Recipient';
 import styles from '../styles/appStyle';
 
@@ -16,7 +16,7 @@ export default class NewRecipient extends Component {
       addressZip: '',
       birthday: '',
       note: '',
-      height: 0,
+      height: 80,
       userInfo: this.props,
       // isLoggedin: false,
       isLoading: false,
@@ -76,7 +76,8 @@ export default class NewRecipient extends Component {
   render() {
     // console.log('NewRecipient props: ', this.props);
     return (
-      <View  style={styles.recipientContainer}>
+      <ScrollView>
+      <ScrollView  style={styles.scrollviewContainer}>
         <View>
           <TextInput
             autoCorrect={false}
@@ -164,7 +165,7 @@ export default class NewRecipient extends Component {
         </View>
         <View>
           <TextInput
-            placeholder="Notes"
+            placeholder="Keep notes on gift ideas, interests, and clothing sizes."
             placeholderTextColor="rgba(231, 73, 148, .75)"
             style={[styles.recipientNotesTextInput, {height: Math.max(35, this.state.height)}]}
             multiline={true}
@@ -183,7 +184,8 @@ export default class NewRecipient extends Component {
             <Text style={styles.buttonText}> SAVE RECIPIENT </Text>
           </TouchableHighlight>
         </View>
-      </View>
+      </ScrollView>
+      </ScrollView>
     )
   }
 };
