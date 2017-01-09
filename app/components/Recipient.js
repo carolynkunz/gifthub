@@ -130,7 +130,7 @@ export default class Recipient extends Component {
               onPress={() => {
               this.setModalVisible(true)
             }}>
-            <Text style={styles.buttonText}>Reminder
+            <Text style={styles.buttonText}>Add Reminder
             </Text>
 
           </TouchableHighlight>

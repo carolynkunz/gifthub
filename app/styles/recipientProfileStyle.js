@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 
   profileRowContainer: {
     flexDirection: 'column',
-    flex: 1,
+    flexGrow: 1,
     padding: 5
   },
 

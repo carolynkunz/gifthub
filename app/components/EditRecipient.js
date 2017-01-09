@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AlertIOS, InteractionManager, Modal, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
+import { AlertIOS, InteractionManager, Modal, StyleSheet, ScrollView, Text, TextInput, TouchableHighlight, View } from 'react-native';
 import Recipient from './Recipient';
 import styles from '../styles/appStyle';
 
@@ -64,7 +64,7 @@ export default class EditRecipient extends Component {
 
         this.setState({ userInfo: resData });
 
-        this.props.navigator.push({
+        this.props.navigator.replacePreviousAndPop({
           title: "Recipient",
           component: Recipient,
           passProps: {
@@ -96,7 +96,7 @@ export default class EditRecipient extends Component {
 
   render() {
     return (
-      <View  style={styles.recipientContainer}>
+      <ScrollView  style={styles.scrollviewContainer}>
         <View>
           <TextInput
             autoCorrect={false}
@@ -184,6 +184,7 @@ export default class EditRecipient extends Component {
             onChangeText={(note) => this.setState({note})}
             value={this.state.note}
           />
+        </View>
           <TouchableHighlight
             style={styles.recipientButton}
             onPress={this.handleSubmit.bind(this)}
@@ -191,8 +192,7 @@ export default class EditRecipient extends Component {
             >
             <Text style={styles.buttonText}> SUBMIT </Text>
           </TouchableHighlight>
-        </View>
-      </View>
+      </ScrollView>
     )
   }
 };
