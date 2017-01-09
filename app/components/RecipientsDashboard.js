@@ -36,6 +36,7 @@ export default class RecipientsDashboard extends Component {
             isLoading: false
           })
         } else {
+          console.log(res);
           this.setState({
             userInfo: res
           })
@@ -110,7 +111,7 @@ export default class RecipientsDashboard extends Component {
 
 
   render() {
-    // console.log('RecipientsDashboard Props: ', this.props);
+    console.log('RecipientsDashboard Props: ', this.props);
 
     let recipientNames = this.state.recipientInfo.map((item, index) => {
       return (
@@ -138,22 +139,7 @@ export default class RecipientsDashboard extends Component {
           <View style={styles.titleSeparator} />
         </View>
 
-
         {recipientNames}
-
-        {/* <View>
-          <Icon.Button
-            name="ios-add-circle-outline"
-            iconStyle={styles.icon}
-            size={30}
-            backgroundColor="#FFF"
-            color="#1F58A2"
-            onPress={this.handleSubmitNewRecipient.bind(this)}
-          >
-            <Text style={styles.addRecipientButtonText}> New Recipient</Text>
-            <Separator />
-          </Icon.Button>
-        </View> */}
 
         <View style={{marginTop: 40}}>
           <TouchableHighlight

@@ -79,6 +79,7 @@ export default class Login extends Component {
         } else {
 
           const userRecipients = resData;
+          console.log(resData);
           const recipientIds = resData.map((item, index) => {
             return item.id;
           });
