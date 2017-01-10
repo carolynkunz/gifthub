@@ -131,7 +131,6 @@ export default class Login extends Component {
         return res.text();
       })
       .then((resData) => {
-        // console.log('resData: ', resData);
         if (resData === 'Username must not be blank') {
           AlertIOS.alert(
             resData
@@ -166,8 +165,6 @@ export default class Login extends Component {
   }
 
   render() {
-    // console.log('Login Props: ', this.props);
-
     return (
       <View  style={styles.loginContainer}>
 

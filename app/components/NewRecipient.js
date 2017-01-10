@@ -75,7 +75,6 @@ export default class NewRecipient extends Component {
   }
 
   render() {
-    // console.log('NewRecipient props: ', this.props);
     return (
       <ScrollView>
       <ScrollView  style={styles.scrollviewContainer}>

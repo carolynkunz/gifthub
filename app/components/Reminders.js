@@ -21,42 +21,6 @@ export default class Reminders extends Component {
     this.setState({date: date});
   }
 
-
-
-  fetchAllReminders() {
-    RNCalendarReminders.fetchAllReminders()
-      .then((reminders) => {
-        console.log(reminders);
-        let reminderId;
-        for (var i = 0; i < reminders.length; i++) {
-          if (reminders[i].title === 'GiftHub Reminder for ' + this.props.passProps.firstName + ' ' + this.props.passProps.lastName) {
-            reminderId = reminders[i].id;
-            break;
-          }
-        }
-        console.log('reminderId: ', reminderId);
-
-        // Update the Reminder, or create a new one.
-        if (reminderId !== undefined) {
-          console.log('Reminder would be removed');
-          // RNCalendarReminders.removeReminder('GiftHub Reminder for ' + this.props.passProps.firstName + ' ' + this.props.passProps.lastName, {
-          //   // id: reminders[i].id,
-          //   id: this.state.reminderId,
-          //   location: '',
-          //   notes: this.state.reminderNotes,
-          //   dueDate: this.state.date,
-          //   alarms: [{
-          //     date: -1 // or absolute date
-          //   }],
-          // });
-          // console.log('!==undefined: ', this.state.reminderId);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-  }
-
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
 
@@ -73,10 +37,7 @@ export default class Reminders extends Component {
           }]
         })
         .then((id) => {
-          console.log(`Saved ID: ${id}`);
-
           // this.setState({reminderId: id});
-          // this.fetchAllReminders();
         });
       })
       .catch((err) => {
@@ -87,13 +48,10 @@ export default class Reminders extends Component {
   }
 
   render() {
-    console.log('Reminders props: ', this.props);
     return (
       <ScrollView contentContainerStyle={styles.scrollviewContainer}>
         <View>
           <Text style={styles.reminderNotesTitle}>Create a Gift Reminder for {this.props.passProps.firstName}</Text>
-
-
           <View style={styles.reminderNotes}>
             <TextInput
               placeholder="Note"
@@ -104,14 +62,12 @@ export default class Reminders extends Component {
             />
           </View>
 
-
           <View style={styles.datePickerView}>
             <DatePicker
               onDateChange={this.onDateChange.bind(this)}
               date={this.state.date}
             />
           </View>
-
 
           <View>
             <TouchableHighlight

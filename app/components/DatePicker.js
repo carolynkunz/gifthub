@@ -21,7 +21,6 @@ export default class DatePicker extends Component {
           timeZoneOffsetInMinutes={this.state.timeZoneOffsetInHours * 60}
           onDateChange={this.props.onDateChange.bind(this)}
           minuteInterval={10}
-          // style={styles.datePicker}
         />
       </View>
     )

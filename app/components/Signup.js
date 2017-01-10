@@ -4,8 +4,6 @@ import styles from '../styles/appStyle';
 import api from '../utils/api';
 import Login from './Login';
 
-// import RecipientsDashboard from './RecipientsDashboard';
-
 export default class Signup extends Component {
   constructor(props) {
     super(props);
@@ -46,37 +44,6 @@ export default class Signup extends Component {
         console.error(err);
       });
   }
-
-  // handleSubmitLogin() {
-  //   let userLogin = {username: this.state.username, password: this.state.password};
-  //   console.log('userLogin handleSubmitLogin: ', userLogin);
-  //   let url = 'https://carolynkunz-gifthub.herokuapp.com/api/token';
-  //   let headers = new Headers();
-  //   let myInit = {
-  //     method: "POST",
-  //     headers: {
-  //       'Accept' : 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(userLogin)
-  //   };
-  //
-  //   fetch(url, myInit)
-  //     .then((res) => {
-  //       if(res.ok) {
-  //         return res.json()
-  //       }
-  //       return res.text();
-  //     })
-  //     .then((resData) => {
-  //       console.log('handleSubmitLogin: ', resData);
-  //       return resData
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  //
-  // }
 
   handleSubmit() {
     let userSignup = {
@@ -145,7 +112,6 @@ export default class Signup extends Component {
 
         } else {
           this.setState({ isLoggedin: true });
-          // this.handleSubmitLogin();
 
           this.props.navigator.push({
             title: this.state.username || "Login",
@@ -162,18 +128,6 @@ export default class Signup extends Component {
       });
 
       this.checkIsLoggedIn();
-    //
-    //
-    // InteractionManager.runAfterInteractions(() => {
-    //   this.setState({
-    //     firstName: '',
-    //     lastName: '',
-    //     email: '',
-    //     username: '',
-    //     password: '',
-    //     isLoggedin: false
-    //   })
-    // })
   }
 
   render() {

@@ -64,20 +64,17 @@ export default class RecipientsDashboard extends Component {
   }
 
   handleRecipientAdded(newRecipient) {
-    // console.log(this.state.recipientInfo.concat(newRecipient));
     this.setState({recipientInfo: this.state.recipientInfo.concat(newRecipient)})
   }
 
   handleSubmitNewRecipient() {
     this.props.navigator.push({
-      // title: "New Recipient",
       component: NewRecipient,
       passProps: {
         userInfo: this.props.userInfo,
         token: this.props.token,
         onRecipientAdded: this.handleRecipientAdded.bind(this)
       },
-      // onRecipientAdded: this.handleRecipientAdded.bind(this),
       isLoading: true
     });
   }
@@ -102,7 +99,8 @@ export default class RecipientsDashboard extends Component {
 
     InteractionManager.runAfterInteractions(() => {
       this.setState({
-        isLoggedin: false
+        isLoggedin: false,
+        isLoading: false
       })
     });
 

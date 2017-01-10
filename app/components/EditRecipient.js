@@ -76,22 +76,6 @@ export default class EditRecipient extends Component {
       .catch((err) => {
         console.error(err);
       });
-    // InteractionManager.runAfterInteractions(() => {
-    //   this.setState({
-    //     firstName: '',
-    //     lastName: '',
-    //     addressLineOne: '',
-    //     addressLineTwo: '',
-    //     addressCity: '',
-    //     addressState: '',
-    //     addressZip: '',
-    //     birthday: '',
-    //     note: '',
-    //     // isLoggedin: false,
-    //     isLoading: false,
-    //     error: false
-    //   })
-    // })
   }
 
   render() {

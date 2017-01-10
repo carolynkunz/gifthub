@@ -49,20 +49,16 @@ export default class Recipient extends Component {
       headers: {
         'Accept' : 'application/json',
         'Content-Type': 'application/json',
-        // 'Authorization': `Bearer ${this.props.token}`
       }
-      // body: JSON.stringify(this.props.user)
     };
 
     fetch(url, myInit)
     .then((res) => {
       console.log(res);
-      // this.props.checkIsLoggedIn();
     })
     .catch((err) => {
       console.error(err);
     })
-
   }
 
   handleSubmit() {
@@ -96,7 +92,6 @@ export default class Recipient extends Component {
     });
     return (
       <ScrollView contentContainerStyle={styles.scrollviewContainer}>
-        <ScrollView>
           {list}
           <TouchableHighlight
             style={styles.recipientButton}
@@ -104,7 +99,6 @@ export default class Recipient extends Component {
             underlayColor="white"
             >
               <Text style={styles.buttonText}> Edit
-                {/* <Icon name="edit" size={20} color="#1F58A2" /> */}
               </Text>
             </TouchableHighlight>
 
@@ -141,11 +135,8 @@ export default class Recipient extends Component {
             underlayColor="white"
             >
               <Text style={styles.buttonText}> Delete Recipient
-                {/* <Icon name="close" size={20} color="#1F58A2" /> */}
               </Text>
             </TouchableOpacity>
-
-        </ScrollView>
       </ScrollView>
       )
     }
